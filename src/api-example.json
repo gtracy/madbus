@@ -1,0 +1,39 @@
+{
+    "status": "0", 
+    "stopID": "0100", 
+    "intersection": "UNIV AVE & N PARK", 
+    "longitude": -89.401365, 
+    "latitude": 43.073399
+}
+
+{
+    "status": "0", 
+    "timestamp": "02:49PM", 
+    "stop": {
+        "stopID": "0100", 
+        "route": [
+            {
+                "arrivalTime": "2:57 pm", 
+                "destination": "WEST TP:FORDEM", 
+                "minutes": "8", 
+                "vehicleID": "unknown", 
+                "routeID": "02"
+            }, 
+            {"arrivalTime": "3:02 pm", "destination": "SOUTH TP", "minutes": "13", "vehicleID": "unknown", "routeID": "13"}, 
+            {"arrivalTime": "3:11 pm", "destination": "WEST TP:MONROE", "minutes": "22", "vehicleID": "unknown", "routeID": "07"}, 
+            {"arrivalTime": "3:25 pm", "destination": "WEST TP:SHERMAN", "minutes": "36", "vehicleID": "unknown", "routeID": "02"}, 
+            {"arrivalTime": "3:33 pm", "destination": "SPRNG HB", "minutes": "44", "vehicleID": "unknown", "routeID": "08"}, 
+            {"arrivalTime": "3:34 pm", "destination": "SOUTH TP", "minutes": "45", "vehicleID": "unknown", "routeID": "04"}, 
+            {"arrivalTime": "3:40 pm", "destination": "WEST TP:MONROE", "minutes": "51", "vehicleID": "unknown", "routeID": "07"}, 
+            {"arrivalTime": "3:55 pm", "destination": "WEST TP:FORDEM", "minutes": "66", "vehicleID": "unknown", "routeID": "02"}, 
+            {"arrivalTime": "4:02 pm", "destination": "SOUTH TP", "minutes": "73", "vehicleID": "unknown", "routeID": "13"}, 
+            {"arrivalTime": "4:10 pm", "destination": "WEST TP:MONROE", "minutes": "81", "vehicleID": "unknown", "routeID": "07"}, 
+            {"arrivalTime": "4:33 pm", "destination": "SPRNG HB", "minutes": "104", "vehicleID": "unknown", "routeID": "08"}, 
+            {"arrivalTime": "4:34 pm", "destination": "SOUTH TP", "minutes": "105", "vehicleID": "unknown", "routeID": "04"}, 
+            {"arrivalTime": "5:02 pm", "destination": "SOUTH TP", "minutes": "133", "vehicleID": "unknown", "routeID": "13"}, 
+            {"arrivalTime": "5:33 pm", "destination": "SPRNG HB", "minutes": "164", "vehicleID": "unknown", "routeID": "08"}, 
+            {"arrivalTime": "5:34 pm", "destination": "SOUTH TP", "minutes": "165", "vehicleID": "unknown", "routeID": "04"}
+        ]
+    }, 
+    "cached": true
+}

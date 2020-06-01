@@ -1,0 +1,12 @@
+Status
+------
+* core functionality built
+* initial API fetch on load storing inside state
+* code layout still pretty rough
+* no refresh mechanism
+* no way to change the stop
+
+ToDo
+----
+* a lot 
+* learn about service workers
