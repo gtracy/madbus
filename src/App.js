@@ -1,26 +1,21 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
+import React, {useState,useEffect} from 'react';
+import Button from '@mui/material/Button';
+import TransitAPI from './transit-api';
+
 import './App.css';
+import { TimerComponent } from './TimerComponent';
+
+const transit = new TransitAPI('nomar');
 
 function StopList(props) {
     return (
         <div >
-            <Button variant="contained" color="primary">
-                {props.value}
+            <Button class="mdc-button">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">{props.value}</span>
             </Button>
         </div>
     )
-}
-
-function Timer(props) {
-    return (
-        <div>
-        <div className="Timer">
-            {props.minutes}
-        </div>
-        <p>{props.asof}</p>
-        </div>
-    );
 }
 
 function Destination(props) {
@@ -29,6 +24,25 @@ function Destination(props) {
             <p>{props.value}</p>
         </div>
     )
+}
+
+const Countdown = (props) => {
+    const [minutes, setMinutes] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setMinutes(minutes => minutes + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+  
+    return (
+        <div>
+        <div className="Timer">
+            {minutes}
+        </div>
+        </div>
+    );
 }
 
 function UpNext(props) {
@@ -80,37 +94,6 @@ class App extends React.Component {
 
     }
 
-    fetchTimes() {
-        fetch("https://api.smsmybus.com/v1/getarrivals?key=nomar&stopID=100")
-        .then(res => res.json())
-        .then(
-            (result) => {
-              if( result.status === "0" &&
-                  result.stop.route.length > 0 ) {
-
-                    this.setState({
-                        timeLoaded : true,
-                        display : {
-                            stop : result.stop.stopID,
-                            results : result.stop.route,
-                            refreshTime : result.timestamp
-                        }
-                    });
-                }
-
-            },
-            (error) => {
-                this.setState({
-                    timeLoaded : false,
-                });
-                console.log('Failed to fetch stop location');
-                console.dir(error);
-            }  
-        )
-        .catch(console.log)
-  
-    }
-
     getNextTimes() {
         let times = this.state.display.results;
         let list_times = <li/>;
@@ -123,42 +106,6 @@ class App extends React.Component {
         return list_times;
     }
 
-    getStopList() {
-        let stops = this.state.bookmarks;
-        let list_stops = stops.map((stop,key) => {
-            return <li key={stop}>{stop}</li>
-        });
-        return list_stops;
-    }
-
-    getStopLocation() {
-        if( this.state.locationLoaded ) {
-            return this.state.display.location;
-        } else {
-            return "loading";
-        }
-    }
-
-    refreshTime() {
-        if( this.state.timeLoaded ) {
-            return this.state.display.refreshTime;
-        } else {
-            return "...";
-        }
-    }
-
-    getNextArrival() {
-        if( this.state.timeLoaded && this.state.display.results.length > 0 ) {
-            return this.state.display.results[0].minutes;
-        } else {
-            return "?";
-        }
-    }
-
-    componentDidMount() {
-        this.fetchTimes();
-        this.fetchStopLocation();
-    }
 
     render() {
 
@@ -169,13 +116,13 @@ class App extends React.Component {
         <div>
         <div className="App">
             <StopList value={this.getStopList()}/>
-            <Timer 
+            <Countdown 
               minutes={this.getNextArrival()}
               asof={this.refreshTime()}
             />
             <Destination value={this.getStopLocation()}/>
             <UpNext value={this.getNextTimes()}/>
-
+            <TimerComponent/>
         </div>
         </div>
       )
