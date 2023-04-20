@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 
 export default function StopList({bookmarks,activeStopIndex,handleSelection}) {
     const classes = useStyles();
-    console.log(Math.round(Math.random()*9999));
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelectedIndex] = React.useState(activeStopIndex);

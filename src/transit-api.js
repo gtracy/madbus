@@ -1,5 +1,5 @@
 
-const TRANSIT_API_ENDPOINT = "https://api.smsmybus.com";
+const TRANSIT_API_ENDPOINT = "https://api.smsmybus.com/v1";
 
 export default class TransitAPI {
     constructor(devkey) {
@@ -7,35 +7,28 @@ export default class TransitAPI {
     }
 
     getArrivals = async (stopid,routeid) => {
-        let endpoint = TRANSIT_API_ENDPOINT + "/getarrivals?key=" + this.devkey + "&stopid=" + stopid;
+        let endpoint = TRANSIT_API_ENDPOINT + "/getarrivals?key=" + this.devkey + "&stopID=" + stopid;
         if( routeid ) {
-            endpoint += "&routeid=" + routeid;
+            endpoint += "&routeID=" + routeid;
         }
 
-        fetch(endpoint)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                if( result.status === "0" ) {
-                    return result.stop.route;
-                } else {
-                    console.log('API is returning an error for '+stopid);
-                }
-            },
-            (error) => {
-                this.setState({
-                    timeLoaded : false,
-                });
-                console.log('Failed to fetch arrival details');
-                console.dir(error);
-            }  
-        )
-        .catch(console.log)
+        const raw = await fetch(endpoint);
+        const result = await raw.json();
+
+        if( result.status === "0" ) {
+            console.log('it worked!');
+            console.dir(result.stop.route);
+            return result.stop.route;
+        } else {
+            console.error('API is returning an error for '+stopid);
+            console.dir(result);
+            return [];
+        }
 
     }
 
     getStopLocation = async(stopid) => {
-        let endpoint = TRANSIT_API_ENDPOINT + "/getstoplocation?key=" + this.devkey + "&stopid=" + stopid;
+        let endpoint = TRANSIT_API_ENDPOINT + "/getstoplocation?key=" + this.devkey + "&stopID=" + stopid;
 
         fetch(endpoint)
         .then(res => res.json())

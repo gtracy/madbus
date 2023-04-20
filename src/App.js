@@ -10,9 +10,6 @@ import { AppBar, Box, Toolbar, Container } from '@mui/material';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
 
 
-import TransitAPI from './transit-api';
-const transit = new TransitAPI('fixme');
-
 const useStyles = makeStyles({
     timer: {
     },
@@ -48,7 +45,7 @@ export default function App()  {
                 </Toolbar>
             </AppBar>
         </Box>
-            {console.dir(bookmarks[activeStopIndex])}
+
         <Arrival activeStop={bookmarks[activeStopIndex]}/>
 
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
