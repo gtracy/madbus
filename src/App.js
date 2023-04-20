@@ -1,132 +1,71 @@
 import React, {useState,useEffect} from 'react';
-import Button from '@mui/material/Button';
+
+import RefreshTimer from './components/RefreshTimer';
+import StopList from './components/StopList';
+import Arrival from './components/Arrival';
+import UserSettings from './components/UserSettings';
+
+import { makeStyles } from '@mui/styles';
+import { AppBar, Box, Toolbar, Container } from '@mui/material';
+import TimelapseIcon from '@mui/icons-material/Timelapse';
+
+
 import TransitAPI from './transit-api';
+const transit = new TransitAPI('fixme');
 
-import './App.css';
-import { TimerComponent } from './TimerComponent';
+const useStyles = makeStyles({
+    timer: {
+    },
+})
 
-const transit = new TransitAPI('nomar');
+export default function App()  {
+    const [activeStop,setActiveStop] = useState(7777);
 
-function StopList(props) {
-    return (
-        <div >
-            <Button class="mdc-button">
-                <span class="mdc-button__ripple"></span>
-                <span class="mdc-button__label">{props.value}</span>
-            </Button>
-        </div>
-    )
-}
+    const classes = useStyles();
 
-function Destination(props) {
-    return (
-        <div >
-            <p>{props.value}</p>
-        </div>
-    )
-}
-
-const Countdown = (props) => {
-    const [minutes, setMinutes] = useState(0);
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setMinutes(minutes => minutes + 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }, []);
-  
-    return (
-        <div>
-        <div className="Timer">
-            {minutes}
-        </div>
-        </div>
-    );
-}
-
-function UpNext(props) {
-    return (
-        <ul>
-            {props.value}
-        </ul>
-    )
-}
-
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            timeLoaded : false,
-            locationLoaded : false,
-            display : {
-                stop : undefined,
-                location : undefined,
-                results : undefined,
-                refreshTime : undefined
-            },
-            bookmarks : ["0100"]
-        };
-
-    }
-
-    fetchStopLocation() {
-        fetch("https://api.smsmybus.com/v1/getstoplocation?key=nomar&stopID=100")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.setState({
-                locationLoaded : true,
-                display : {
-                    location : result.intersection
-                }
-            });
-          },
-          (error) => {
-              this.setState({
-                  locationLoaded : false
-              });
-              console.log('Failed to fetch stop location');
-              console.dir(error);
-          }
-        )
-        .catch(console.log)
-
-    }
-
-    getNextTimes() {
-        let times = this.state.display.results;
-        let list_times = <li/>;
-        if( times && times.length > 0 ) {
-            list_times = times.map((time,key) => {
-                return <li key={time.destinaton}>{time.minutes} via {time.destination}</li>
-            });
+    const state = {
+        stopid : '1100',
+        stop_location : "E Mifflin & N Pinckney (WB)",
+        arrivals : {
+            status : 0,
+            timestamp : "unknown",
+            routes : []
+        },
+        user : {
+            bookmarks : [activeStop,"0100","1100","1505","1878"]
         }
-        console.dir(list_times);
-        return list_times;
+    };
+
+    function getStopList() {
+        return state.user.bookmarks;
     }
 
+    return(<div>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar 
+                position="static"
+                elevation={0}
+            >
+                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                    <StopList
+                        bookmarks={state.user.bookmarks}
+                        handleSelection={setActiveStop}
+                    />
+                    <TimelapseIcon 
+                      fontSize="large"
+                    />
+                </Toolbar>
+            </AppBar>
+        </Box>
 
-    render() {
+        <Arrival value={activeStop}/>
 
-      const nextTimes = this.getNextTimes();
-      const stopList = this.getStopList();
+        <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+          <Toolbar>
+            feedback
+          </Toolbar>
+        </AppBar>
 
-      return(
-        <div>
-        <div className="App">
-            <StopList value={this.getStopList()}/>
-            <Countdown 
-              minutes={this.getNextArrival()}
-              asof={this.refreshTime()}
-            />
-            <Destination value={this.getStopLocation()}/>
-            <UpNext value={this.getNextTimes()}/>
-            <TimerComponent/>
-        </div>
-        </div>
-      )
-  };
+    </div>)
+
 }
-
-export default App;
