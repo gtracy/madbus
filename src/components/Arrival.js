@@ -76,13 +76,13 @@ function UpcomingArrivals({routes}) {
     )
 }
 
-export default function Arrival({route,arrivalMinutes,destination}) {
+export default function Arrival({activeStop}) {
     const classes = useStyles();
 
     // stub the inputs for children components
-    route = 3;
-    arrivalMinutes = 9;
-    destination = 'Wisconsin Capital';
+    const route = 3;
+    const arrivalMinutes = activeStop.stopid.slice(0,2);
+    const destination = 'Wisconsin Capital';
 
 
     const upcoming = [

@@ -19,26 +19,16 @@ const useStyles = makeStyles({
 })
 
 export default function App()  {
-    const [activeStop,setActiveStop] = useState(7777);
+    const [bookmarks,updateBookmarks] = useState([
+        {stopid:"0100",intersection:"Main & West"},
+        {stopid:"1100",intersection:"Main & East"},
+        {stopid:"1505",intersection:"Chuch & Main"},
+        {stopid:"1878",intersection:"Prospect & Church"}
+    ]);
+    const [activeStopIndex,setActiveStopIndex] = useState(0);
+
 
     const classes = useStyles();
-
-    const state = {
-        stopid : '1100',
-        stop_location : "E Mifflin & N Pinckney (WB)",
-        arrivals : {
-            status : 0,
-            timestamp : "unknown",
-            routes : []
-        },
-        user : {
-            bookmarks : [activeStop,"0100","1100","1505","1878"]
-        }
-    };
-
-    function getStopList() {
-        return state.user.bookmarks;
-    }
 
     return(<div>
         <Box sx={{ flexGrow: 1 }}>
@@ -48,8 +38,9 @@ export default function App()  {
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <StopList
-                        bookmarks={state.user.bookmarks}
-                        handleSelection={setActiveStop}
+                        bookmarks={bookmarks}
+                        activeStopIndex={activeStopIndex}
+                        handleSelection={setActiveStopIndex}
                     />
                     <TimelapseIcon 
                       fontSize="large"
@@ -57,8 +48,8 @@ export default function App()  {
                 </Toolbar>
             </AppBar>
         </Box>
-
-        <Arrival value={activeStop}/>
+            {console.dir(bookmarks[activeStopIndex])}
+        <Arrival activeStop={bookmarks[activeStopIndex]}/>
 
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>
