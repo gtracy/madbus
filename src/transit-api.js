@@ -16,8 +16,6 @@ export default class TransitAPI {
         const result = await raw.json();
 
         if( result.status === "0" ) {
-            console.log('it worked!');
-            console.dir(result.stop.route);
             return result.stop.route;
         } else {
             console.error('API is returning an error for '+stopid);
