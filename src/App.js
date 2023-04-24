@@ -1,14 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useCallback} from 'react';
 
 import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
-import UserSettings from './components/UserSettings';
 
 import { makeStyles } from '@mui/styles';
-import { AppBar, Box, Toolbar, Container } from '@mui/material';
-import TimelapseIcon from '@mui/icons-material/Timelapse';
-
+import { AppBar, Box, Toolbar } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 const useStyles = makeStyles({
     timer: {
@@ -16,15 +14,20 @@ const useStyles = makeStyles({
 })
 
 export default function App()  {
-    const [bookmarks,updateBookmarks] = useState([
-        {stopid:"0100",intersection:"Main & West"},
-        {stopid:"1100",intersection:"Main & East"},
-        {stopid:"1505",intersection:"Chuch & Main"},
-        {stopid:"1878",intersection:"Prospect & Church"}
-    ]);
-    const [activeStopIndex,setActiveStopIndex] = useState(0);
 
+    const [activeStopID,setActiveStopID] = useState('0100');
+    const [refreshFlag, setRefreshFlag] = useState(false);
 
+    const handleRefresh = useCallback(() => {
+        setRefreshFlag(!refreshFlag);
+        console.log('setting refresh flag?!?');
+      }, [refreshFlag]);
+        
+    useEffect(() => {
+      // put any code that needs to be executed on refresh here
+      console.log('trigger App refresh!');
+    }, [refreshFlag]);
+  
     const classes = useStyles();
 
     return(<div>
@@ -35,18 +38,16 @@ export default function App()  {
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <StopList
-                        bookmarks={bookmarks}
-                        activeStopIndex={activeStopIndex}
-                        handleSelection={setActiveStopIndex}
+                        handleSelection={setActiveStopID}
                     />
-                    <TimelapseIcon 
-                      fontSize="large"
-                    />
+                    <IconButton>
+                      <RefreshTimer handleRefresh={handleRefresh}/>
+                    </IconButton>
                 </Toolbar>
             </AppBar>
         </Box>
 
-        <Arrival activeStop={bookmarks[activeStopIndex]}/>
+        <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
 
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>

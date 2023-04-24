@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import Button from '@mui/material/Button';
-import { IconButton, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@mui/styles';
 
 
@@ -21,11 +18,18 @@ const useStyles = makeStyles({
     }
 })
 
-export default function StopList({bookmarks,activeStopIndex,handleSelection}) {
+export default function StopList({handleSelection}) {
     const classes = useStyles();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(activeStopIndex);
+    const [bookmarks,updateBookmarks] = useState([
+        {stopid:"0100",intersection:"Main & West"},
+        {stopid:"1100",intersection:"Main & East"},
+        {stopid:"1505",intersection:"Chuch & Main"},
+        {stopid:"1878",intersection:"Prospect & Church"}
+    ]);
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const open = Boolean(anchorEl);
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -34,7 +38,7 @@ export default function StopList({bookmarks,activeStopIndex,handleSelection}) {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index);
         setAnchorEl(null);
-        handleSelection(index)
+        handleSelection(bookmarks[index].stopid)
     };
 
     const handleClose = () => {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState, useEffect, setLoading } from 'react';
-
-import TransitAPI from '../transit-api';
+import { useState, useEffect } from 'react';
 
 import { Box, Typography, LinearProgress } from '@mui/material';
 import ArrowRight from '@mui/icons-material/ArrowRight';
 import { makeStyles } from '@mui/styles';
+
+import TransitAPI from '../transit-api';
+
 
 const useStyles = makeStyles({
     containerDetails: {
@@ -102,7 +103,7 @@ function UpcomingArrivals({routes}) {
     )
 }
 
-export default function Arrival({activeStop}) {
+export default function Arrival({activeStopID,refresh}) {
     const [arrivals,setArrivals] = useState({"status":-1});
     const [loading,setLoading] = useState(true);
 
@@ -110,8 +111,10 @@ export default function Arrival({activeStop}) {
     const transit = new TransitAPI('nomar');
 
     useEffect( () => {
-        transit.getArrivals(activeStop.stopid)
+        setLoading(true);
+        transit.getArrivals(activeStopID)
           .then(result => {
+            console.log('new transit results are in... '+activeStopID);
             setArrivals(result)
           })
           .catch(error => {
@@ -120,9 +123,8 @@ export default function Arrival({activeStop}) {
           })
           .finally(() => {
             setLoading(false);
-            console.log('loaded!');
-          })
-    },[activeStop])
+          });
+    },[activeStopID,refresh])
 
     return (
         <Box
