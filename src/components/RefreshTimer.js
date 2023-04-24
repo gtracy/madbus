@@ -1,12 +1,12 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const REFRESH_RATE = 10; // 30 seconds
+const REFRESH_RATE = 30; // 30 seconds
 
 function prettyProgressLabel(progress) {
   // progress is a value between 0 - 100

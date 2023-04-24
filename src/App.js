@@ -4,14 +4,8 @@ import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 
-import { makeStyles } from '@mui/styles';
-import { AppBar, Box, Toolbar } from '@mui/material';
-import { IconButton } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 
-const useStyles = makeStyles({
-    timer: {
-    },
-})
 
 export default function App()  {
 
@@ -20,16 +14,11 @@ export default function App()  {
 
     const handleRefresh = useCallback(() => {
         setRefreshFlag(!refreshFlag);
-        console.log('setting refresh flag?!?');
       }, [refreshFlag]);
         
     useEffect(() => {
-      // put any code that needs to be executed on refresh here
-      console.log('trigger App refresh!');
     }, [refreshFlag]);
   
-    const classes = useStyles();
-
     return(<div>
         <Box sx={{ flexGrow: 1 }}>
             <AppBar 

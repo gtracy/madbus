@@ -6,6 +6,7 @@ import ArrowRight from '@mui/icons-material/ArrowRight';
 import { makeStyles } from '@mui/styles';
 
 import TransitAPI from '../transit-api';
+const transit = new TransitAPI('nomar');
 
 
 const useStyles = makeStyles({
@@ -108,13 +109,11 @@ export default function Arrival({activeStopID,refresh}) {
     const [loading,setLoading] = useState(true);
 
     const classes = useStyles();
-    const transit = new TransitAPI('nomar');
 
     useEffect( () => {
         setLoading(true);
         transit.getArrivals(activeStopID)
           .then(result => {
-            console.log('new transit results are in... '+activeStopID);
             setArrivals(result)
           })
           .catch(error => {
