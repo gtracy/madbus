@@ -49,28 +49,20 @@ export default function StopList({handleSelection}) {
             component="nav"
             sx={{ bgcolor: 'inherit' }}
         >
-            <ListItem
-                onClick={handleClickListItem}
-            >
+            <ListItem onClick={handleClickListItem}>
                 <ArrowDropDownIcon fontSize="large"/>
-                        <ListItemText
-                            primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
-                            primary={bookmarks[selectedIndex].stopid}
-                            secondary={bookmarks[selectedIndex].intersection}
-                        />
-
-                </ListItem>
+                <ListItemText
+                    primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
+                    primary={bookmarks[selectedIndex].stopid}
+                    secondary={bookmarks[selectedIndex].intersection}
+                />
+            </ListItem>
                 
         </List>
         <Menu
-            id="lock-menu"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            MenuListProps={{
-            'aria-labelledby': 'lock-button',
-            role: 'listbox',
-            }}
         >
             {bookmarks.map((stop, index) => (
                 <MenuItem
