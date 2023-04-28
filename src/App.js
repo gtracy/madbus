@@ -4,7 +4,7 @@ import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 
-import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
 
 export default function App()  {
@@ -40,7 +40,9 @@ export default function App()  {
 
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>
-            feedback
+            <Typography variant="subtitle2">
+              please send me feedback <span>&#x1F64F;</span>
+            </Typography>
           </Toolbar>
         </AppBar>
 
