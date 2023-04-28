@@ -23,6 +23,17 @@ const useStyles = makeStyles({
     }
 });
 
+const prettyDestination = (destination) => {
+    let new_destination = destination.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+    if (new_destination.includes("Via")) {
+        const index = new_destination.indexOf("Via");
+        new_destination = new_destination.slice(0, index) + "via" + new_destination.slice(index + 3);
+    }
+            
+    return new_destination;
+
+}
+
 function ArrivalCountdown({routes}) {
     const classes = useStyles();
 
@@ -104,7 +115,7 @@ function UpcomingArrivals({routes}) {
                 </td>
                 <td>
                     <Typography variant="body2">
-                        {r.destination}
+                        {prettyDestination(r.destination)}
                     </Typography>
                 </td>
             </tr>
