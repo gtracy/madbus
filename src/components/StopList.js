@@ -1,16 +1,14 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { makeStyles } from '@mui/styles';
 
+import { List, ListItem, ListItemText} from '@mui/material';
+import { Menu, MenuItem} from '@mui/material';
+import { Typography } from '@mui/material';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
 const useStyles = makeStyles({
     stopListbutton:{
@@ -52,19 +50,17 @@ export default function StopList({handleSelection}) {
             sx={{ bgcolor: 'inherit' }}
         >
             <ListItem
-            id="lock-button"
-            aria-haspopup="listbox"
-            aria-controls="lock-menu"
-            aria-label="when device is locked"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClickListItem}
+                onClick={handleClickListItem}
             >
-            <ListItemText
-                primary={bookmarks[selectedIndex].stopid}
-            />
-            <ArrowDropDownIcon/>
-            </ListItem>
-            {bookmarks[selectedIndex].intersection}
+                <ArrowDropDownIcon fontSize="large"/>
+                        <ListItemText
+                            primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
+                            primary={bookmarks[selectedIndex].stopid}
+                            secondary={bookmarks[selectedIndex].intersection}
+                        />
+
+                </ListItem>
+                
         </List>
         <Menu
             id="lock-menu"
@@ -77,13 +73,22 @@ export default function StopList({handleSelection}) {
             }}
         >
             {bookmarks.map((stop, index) => (
-            <MenuItem
-                key={stop.stopid}
-                selected={index === selectedIndex}
-                onClick={(event) => handleMenuItemClick(event, index)}
-            >
-                {stop.stopid}
-            </MenuItem>
+                <MenuItem
+                    key={stop.stopid}
+                    selected={index === selectedIndex}
+                    onClick={(event) => handleMenuItemClick(event, index)}
+                >
+                    <Typography variant="subtitle1"
+                       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    >                        
+                        {stop.stopid} 
+                        <PlaceOutlinedIcon 
+                            sx={{ minWidth: '40px'}}
+                            fontSize='small'
+                        /> 
+                        {stop.intersection}
+                    </Typography>
+                </MenuItem>
             ))}
         </Menu>
         </div>
