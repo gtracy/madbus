@@ -8,12 +8,18 @@ import { makeStyles } from '@mui/styles';
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI('nomar');
 
+const MAX_ARRIVALS_SHOWN = 6;
 
 const useStyles = makeStyles({
     containerDetails: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    spacer: {
+        padding: 0,
+        margin: 0,
+        lineHeight: .5
     }
 });
 
@@ -64,21 +70,37 @@ function UpcomingArrivals({routes}) {
     const classes = useStyles();
 
     let arrivals = [];
+    let more_coming = false;
     routes.forEach((r,index) => {
         // skip the first entry which is already displayed
         // in ArrivalCountdown component
         if( index === 0 ) return;
+        if( index >= MAX_ARRIVALS_SHOWN ) {
+            more_coming = true;
+            return;
+        }
         if( r.minutes > 50 ) return;
 
         const key = r.routeID+"."+r.minutes;
         arrivals.push(
-            <tr key={key}>
+            <React.Fragment key={key}>
+            <tr  sx={{ padding:'0px',margin:'0px'}}>
                 <td>
-                    <Typography variant="subtitle1"
-                       sx={{ display: 'flex', alignItems: 'center' }}
+                    <Typography variant="h7"
+                       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
-                        Route {r.routeID} in {r.minutes}min <ArrowRight fontSize="small"/>
+                        route {r.routeID}
                     </Typography>
+                    <Typography variant="h5"
+                        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                        {r.minutes}min
+                    </Typography>
+                </td>
+                <td>
+                    <ArrowRight fontSize="small"
+                    sx={{ minWidth: '20px'}}
+                    />
                 </td>
                 <td>
                     <Typography variant="body2">
@@ -86,8 +108,27 @@ function UpcomingArrivals({routes}) {
                     </Typography>
                 </td>
             </tr>
+            <tr sx={{ padding:'0px',margin:'0px'}}>
+                <td colSpan={3}>
+                    <hr style={{padding:0,margin:0}}/>
+                </td>
+            </tr>
+            </React.Fragment>
         );
     });
+    if( more_coming ) {
+        arrivals.push(
+            <tr sx={{ padding:'0px',margin:'0px'}}>
+                <td colSpan={3}>
+                    <Typography variant="subtitle2"
+                        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                        ... more coming ...
+                    </Typography>
+                </td>
+            </tr>
+        )
+    }
 
     return(
         <Box 
@@ -131,7 +172,7 @@ export default function Arrival({activeStopID,refresh}) {
             flexDirection="column"
             sx={{
                 bgcolor: '#0fe8fc',
-                marginTop: '10vh',
+                marginTop: '5vh',
             }}
         >
             {loading ? (
