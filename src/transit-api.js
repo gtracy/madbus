@@ -4,10 +4,10 @@ const MOCK_ON_ERROR = true;
 const mock_route_data = [
     {routeID:'XX',minutes:5,destination:'WEST TRANSFER VIA SHERMAN'},
     {routeID:'02',minutes:8,destination:'WEST TRANSFER VIA SHERMAN'},
-    {routeID:'08',minutes:8,destination:'SPRING HARBOR'},
-    {routeID:'04',minutes:8,destination:'SOUTH TRANSFER'},
-    {routeID:'28',minutes:8,destination:'WEST TRANSFER'},
-    {routeID:'15',minutes:8,destination:'HIGH POINT: VIA OLD MIDDLETON'}
+    {routeID:'08',minutes:10,destination:'SPRING HARBOR'},
+    {routeID:'04',minutes:12,destination:'SOUTH TRANSFER'},
+    {routeID:'28',minutes:25,destination:'WEST TRANSFER'},
+    {routeID:'15',minutes:46,destination:'HIGH POINT: VIA OLD MIDDLETON'}
 ]
 
 
