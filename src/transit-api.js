@@ -1,5 +1,15 @@
 
 const TRANSIT_API_ENDPOINT = "https://api.smsmybus.com/v1";
+const MOCK_ON_ERROR = true;
+const mock_route_data = [
+    {routeID:'XX',minutes:5,destination:'WEST TRANSFER VIA SHERMAN'},
+    {routeID:'02',minutes:8,destination:'WEST TRANSFER VIA SHERMAN'},
+    {routeID:'08',minutes:8,destination:'SPRING HARBOR'},
+    {routeID:'04',minutes:8,destination:'SOUTH TRANSFER'},
+    {routeID:'28',minutes:8,destination:'WEST TRANSFER'},
+    {routeID:'15',minutes:8,destination:'HIGH POINT: VIA OLD MIDDLETON'}
+]
+
 
 export default class TransitAPI {
     constructor(devkey) {
@@ -12,15 +22,23 @@ export default class TransitAPI {
             endpoint += "&routeID=" + routeid;
         }
 
-        const raw = await fetch(endpoint);
-        const result = await raw.json();
+        try {
+            const raw = await fetch(endpoint);
+            const result = await raw.json();
 
-        if( result.status === "0" ) {
-            return result.stop.route;
-        } else {
-            console.error('API is returning an error for '+stopid);
-            console.dir(result);
-            return [];
+            if( result.status === "0" ) {
+                return result.stop.route;
+            } else {
+                console.error('API is returning an error for '+stopid);
+                console.dir(result);    
+                return [];
+            }
+        } catch(e) {
+            if( MOCK_ON_ERROR ) {
+                return mock_route_data;
+            } else {
+                console.log(e);
+            }
         }
 
     }
