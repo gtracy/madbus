@@ -91,11 +91,10 @@ export default function StopList({handleSelection}) {
             ))}
             <hr/>
             <Button
-                variant="contained"
                 color="primary"
                 onClick={handleMenuAddClick}
             >
-                +Add
+                + Add
             </Button>
         </Menu>
         </div>

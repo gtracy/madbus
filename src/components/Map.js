@@ -2,8 +2,7 @@
 import React from 'react';
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import { makeStyles } from '@mui/styles';
-import mapStyle from "../map_style";
+import { mapStyle } from "../map_style";
 
 // AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM
 
@@ -11,7 +10,6 @@ async function fetchStopDetails(placeId) {
   }
   
 export default function Map(user) {
-    const center = useMemo(() => ({lat:43.0731,lng:-89.3911}));
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
@@ -35,13 +33,12 @@ export default function Map(user) {
         <div>
             <GoogleMap 
                 zoom={15} 
-                center={center}
+                center={{lat:43.0731,lng:-89.3911}}
                 mapContainerClassName='map-container'
                 options={mapOptions}
+                clickableIcons={false}
                 onClick={transitClick}
             >
-                <Marker position={center}
-                    />
 
             </GoogleMap>
         </div>
