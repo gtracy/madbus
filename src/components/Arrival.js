@@ -95,7 +95,7 @@ function UpcomingArrivals({routes}) {
         const key = r.routeID+"."+r.minutes;
         arrivals.push(
             <React.Fragment key={key}>
-            <tr  sx={{ padding:'0px',margin:'0px'}}>
+            <tr sx={{ padding:'0px',margin:'0px'}}>
                 <td>
                     <Typography variant="h7"
                        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -129,7 +129,7 @@ function UpcomingArrivals({routes}) {
     });
     if( more_coming ) {
         arrivals.push(
-            <tr sx={{ padding:'0px',margin:'0px'}}>
+            <tr key={'more-coming'} sx={{ padding:'0px',margin:'0px'}}>
                 <td colSpan={3}>
                     <Typography variant="subtitle2"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
