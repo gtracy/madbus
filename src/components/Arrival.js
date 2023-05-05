@@ -65,7 +65,7 @@ function ArrivalCountdown({routes}) {
             <Typography variant="body2"
               sx={{ display: 'flex', alignItems: 'center' }}
             >
-                Route {routeid}<ArrowRight fontSize="small"/>{destination}
+                Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
             </Typography>
 
             <Typography variant="h1">
