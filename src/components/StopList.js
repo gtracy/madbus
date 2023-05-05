@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { makeStyles } from '@mui/styles';
 
-import { List, ListItem, ListItemText} from '@mui/material';
+import { Button, List, ListItem, ListItemText} from '@mui/material';
 import { Menu, MenuItem} from '@mui/material';
 import { Typography } from '@mui/material';
 
@@ -17,6 +18,8 @@ const useStyles = makeStyles({
 })
 
 export default function StopList({handleSelection}) {
+    const navigate = useNavigate();
+
     const classes = useStyles();
 
     const [bookmarks,updateBookmarks] = useState([
@@ -42,6 +45,10 @@ export default function StopList({handleSelection}) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleMenuAddClick = (event) => {
+        navigate('/map');
+    }
 
     return (
         <div>
@@ -82,6 +89,14 @@ export default function StopList({handleSelection}) {
                     </Typography>
                 </MenuItem>
             ))}
+            <hr/>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleMenuAddClick}
+            >
+                +Add
+            </Button>
         </Menu>
         </div>
     );

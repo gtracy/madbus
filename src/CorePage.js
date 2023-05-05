@@ -6,8 +6,7 @@ import Arrival from './components/Arrival';
 
 import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
-
-export default function App()  {
+export default function Core()  {
 
     const [activeStopID,setActiveStopID] = useState('0100');
     const [refreshFlag, setRefreshFlag] = useState(false);
@@ -41,7 +40,7 @@ export default function App()  {
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>
             <Typography variant="subtitle2">
-              please send me feedback <span>&#x1F64F;</span>
+              please send me your feedback <span>&#x1F64F;</span>
             </Typography>
           </Toolbar>
         </AppBar>
