@@ -3,7 +3,7 @@ export const mapStyle =  [
     {
       "stylers": [
         {
-          "color": "#c3ffb1"
+          "color": "#b1baff"
         }
       ]
     },
@@ -283,25 +283,26 @@ export const mapStyle =  [
       "featureType": "transit",
       "stylers": [
         {
-          "visibility": "on"
+          "visibility": "off"
         }
       ]
     },
-    {
-      "featureType": "transit.line",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#e5e5e5"
-        }
-      ]
-    },
+    // {
+    //   "featureType": "transit.line",
+    //   "elementType": "geometry",
+    //   "stylers": [
+    //     {
+    //       "color": "#e5e5e5"
+    //     }
+    //   ]
+    // },
     {
       "featureType": "transit.station",
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#eeeeee"
+          "color": "#eeeeee",
+          "weight": 4
         }
       ]
     },
