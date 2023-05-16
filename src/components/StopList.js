@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { makeStyles } from '@mui/styles';
 
 import { Button, List, ListItem, ListItemText} from '@mui/material';
 import { Menu, MenuItem} from '@mui/material';
@@ -11,27 +9,18 @@ import { Typography } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
-const useStyles = makeStyles({
-    stopListbutton:{
-        flexGrow: 1,
-    }
-})
+import * as Bookmarks from '../bookmarks';
+
 
 export default function StopList({handleSelection}) {
     const navigate = useNavigate();
 
-    const classes = useStyles();
-
-    const [bookmarks,updateBookmarks] = useState([
-        {stopid:"0100",intersection:"Main & West"},
-        {stopid:"1100",intersection:"Main & East"},
-        {stopid:"1505",intersection:"Chuch & Main"},
-        {stopid:"1878",intersection:"Prospect & Church"}
-    ]);
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const open = Boolean(anchorEl);
+
+    const [bookmarks,updateBookmarks] = useState(Bookmarks.getBookmarks());
+
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
     };
