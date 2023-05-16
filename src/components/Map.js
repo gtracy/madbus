@@ -1,17 +1,15 @@
 
 import React from 'react';
-import { useEffect, useState, useMemo } from "react";
-import { GoogleMap, useLoadScript, Marker, TransitLayer, InfoWindow } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { Typography, Button } from '@mui/material';
+
 import { mapStyle } from "../map_style";
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 
 import TransitAPI from '../transit-api';
-const transit = new TransitAPI('nomar');
+const transit = new TransitAPI('madbus');
 
 
-async function fetchStopDetails(placeId) {
-}
-  
 export default function Map(user) {
     const markerIcon = "/img/black-outline.png";
     const mapOptions = {
@@ -21,7 +19,7 @@ export default function Map(user) {
     }
     const [stops,setStops] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    const [center, setCenter] = useState({ lat:43.0731,lng:-89.3911 }); // initial center location
+    const [center] = useState({ lat:43.0731,lng:-89.3911 }); // initial center location
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
@@ -71,9 +69,21 @@ export default function Map(user) {
                         onCloseClick={handleCloseInfoWindow}
                     >
                         <div>
-                            <h2>{selectedMarker.stopID}</h2>
-                            <p>{selectedMarker.intersection}</p>
-                            <p>{selectedMarker.direction}</p>
+                            <Typography variant="h6">
+                                {selectedMarker.intersection}
+                            </Typography>
+                            <Typography variant="subtitle1">
+                                {selectedMarker.direction}
+                            </Typography>
+                            <Typography variant="subtitle2">
+                                Stop #{selectedMarker.stopID}
+                            </Typography>
+                            <Button
+                                color="primary"
+                                // onClick={handleMenuAddClick}
+                            >
+                                + Bookmark
+                            </Button>
                         </div>
                     </InfoWindow>
                 )}

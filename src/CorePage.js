@@ -6,7 +6,7 @@ import Arrival from './components/Arrival';
 
 import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
-export default function Core()  {
+export default function CorePage()  {
 
     const [activeStopID,setActiveStopID] = useState('0100');
     const [refreshFlag, setRefreshFlag] = useState(false);

@@ -6,7 +6,7 @@ import ArrowRight from '@mui/icons-material/ArrowRight';
 import { makeStyles } from '@mui/styles';
 
 import TransitAPI from '../transit-api';
-const transit = new TransitAPI('nomar');
+const transit = new TransitAPI('madbus');
 
 const MAX_ARRIVALS_SHOWN = 6;
 
@@ -170,7 +170,6 @@ export default function Arrival({activeStopID,refresh}) {
           })
           .catch(error => {
             console.error("error loading arrival data");
-            console.dir(error);
           })
           .finally(() => {
             setLoading(false);
