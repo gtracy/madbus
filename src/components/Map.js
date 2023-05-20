@@ -97,10 +97,12 @@ export default function Map(user) {
                                     onClick={() => updateBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== selectedMarker.stopID))}
                                 >
                                     <BookmarkAddedIcon
-                                        fontSize="medium"/>
-                                        <Typography variant="caption" ml={.5}>
+                                        fontSize="medium"
+                                        color="success"
+                                    />
+                                    <Typography variant="caption" ml={.5}>
                                         <span style={{ color: 'grey' }}>remove</span>
-                                        </Typography>
+                                    </Typography>
                                 </Button>
                             </div>) : (<div>
                                 <Button
@@ -109,10 +111,12 @@ export default function Map(user) {
                                     onClick={() => updateBookmarks([...bookmarks, selectedMarker])}
                                 >
                                     <BookmarkAddIcon
-                                        fontSize="medium"/>
-                                        <Typography variant="caption" ml={.5}>
-                                            add
-                                        </Typography>
+                                        fontSize="medium"
+                                        color="action"
+                                    />
+                                    <Typography variant="caption" ml={.5}>
+                                        add
+                                    </Typography>
                                 </Button>
                             </div>)}
                         </div>
