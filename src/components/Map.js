@@ -89,15 +89,32 @@ export default function Map(user) {
                             <Typography variant="subtitle2">
                                 Stop #{selectedMarker.stopID}
                             </Typography>
-                            <Button
-                                sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
-                                color="primary"
-                                onClick={() => updateBookmarks([...bookmarks, selectedMarker])}
-                            >
-                                <BookmarkAddIcon
+
+                            {bookmarks.find((bookmark) => bookmark.stopID === selectedMarker.stopID) ? (<div>
+                                <Button
                                     sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
-                                    fontSize="medium"/> Bookmark
-                            </Button>
+                                    color="primary"
+                                    onClick={() => updateBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== selectedMarker.stopID))}
+                                >
+                                    <BookmarkAddedIcon
+                                        fontSize="medium"/>
+                                        <Typography variant="caption" ml={.5}>
+                                        <span style={{ color: 'grey' }}>remove</span>
+                                        </Typography>
+                                </Button>
+                            </div>) : (<div>
+                                <Button
+                                    sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
+                                    color="primary"
+                                    onClick={() => updateBookmarks([...bookmarks, selectedMarker])}
+                                >
+                                    <BookmarkAddIcon
+                                        fontSize="medium"/>
+                                        <Typography variant="caption" ml={.5}>
+                                            add
+                                        </Typography>
+                                </Button>
+                            </div>)}
                         </div>
                     </InfoWindow>
                 )}
