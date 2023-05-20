@@ -9,17 +9,16 @@ import { Typography } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
-import * as Bookmarks from '../bookmarks';
+import { useBookmarks } from '../bookmarks';
 
 
 export default function StopList({handleSelection}) {
+    const { bookmarks } = useBookmarks();
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const open = Boolean(anchorEl);
-
-    const [bookmarks,updateBookmarks] = useState(Bookmarks.getBookmarks());
 
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -28,7 +27,7 @@ export default function StopList({handleSelection}) {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index);
         setAnchorEl(null);
-        handleSelection(bookmarks[index].stopid)
+        handleSelection(bookmarks[index].stopID)
     };
 
     const handleClose = () => {
@@ -49,7 +48,7 @@ export default function StopList({handleSelection}) {
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
                     primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
-                    primary={bookmarks[selectedIndex].stopid}
+                    primary={bookmarks[selectedIndex].stopID}
                     secondary={bookmarks[selectedIndex].intersection}
                 />
             </ListItem>
@@ -62,14 +61,14 @@ export default function StopList({handleSelection}) {
         >
             {bookmarks.map((stop, index) => (
                 <MenuItem
-                    key={stop.stopid}
+                    key={stop.stopID}
                     selected={index === selectedIndex}
                     onClick={(event) => handleMenuItemClick(event, index)}
                 >
                     <Typography variant="subtitle1"
                        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >                        
-                        {stop.stopid} 
+                        {stop.stopID} 
                         <PlaceOutlinedIcon 
                             sx={{ minWidth: '40px'}}
                             fontSize='small'

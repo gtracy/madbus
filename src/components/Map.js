@@ -1,14 +1,18 @@
 
-import React from 'react';
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { Typography, Button } from '@mui/material';
+
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+
+import { useBookmarks } from '../bookmarks';
 
 import { mapStyle } from "../map_style";
 
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI('madbus');
-
+const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
 
 export default function Map(user) {
     const markerIcon = "/img/black-outline.png";
@@ -17,9 +21,11 @@ export default function Map(user) {
         zoomControl:true,
         styles: mapStyle
     }
+
+    const { bookmarks, setBookmarks } = useBookmarks();
     const [stops,setStops] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    const [center] = useState({ lat:43.0731,lng:-89.3911 }); // initial center location
+    const [center] = useState(MADISON_MAP_CENTER);
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
@@ -27,12 +33,17 @@ export default function Map(user) {
 
     const handleMarkerClick = (marker) => {
         setSelectedMarker(marker);
-      };
+    };
     
-      const handleCloseInfoWindow = () => {
+    const handleCloseInfoWindow = () => {
         setSelectedMarker(null);
-      };
-  
+    };
+
+    const updateBookmarks = (stopList) => {
+        console.dir(stopList.length);
+        setBookmarks(stopList);
+    };
+    
     useEffect( () => {
         transit.getStops()
             .then(result => {
@@ -79,18 +90,17 @@ export default function Map(user) {
                                 Stop #{selectedMarker.stopID}
                             </Typography>
                             <Button
+                                sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
                                 color="primary"
-                                // onClick={handleMenuAddClick}
+                                onClick={() => updateBookmarks([...bookmarks, selectedMarker])}
                             >
-                                + Bookmark
+                                <BookmarkAddIcon
+                                    sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
+                                    fontSize="medium"/> Bookmark
                             </Button>
                         </div>
                     </InfoWindow>
                 )}
-
-                {/* <InfoWindow
-                    onClick={stopClick}
-                /> */}
 
             </GoogleMap>
         </div>

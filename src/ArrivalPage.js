@@ -6,7 +6,7 @@ import Arrival from './components/Arrival';
 
 import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
-export default function CorePage()  {
+export default function ArrivalPage()  {
 
     const [activeStopID,setActiveStopID] = useState('0100');
     const [refreshFlag, setRefreshFlag] = useState(false);
@@ -18,7 +18,8 @@ export default function CorePage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return(<div>
+    return(
+      <div>
         <Box sx={{ flexGrow: 1 }}>
             <AppBar 
                 position="static"
@@ -44,7 +45,7 @@ export default function CorePage()  {
             </Typography>
           </Toolbar>
         </AppBar>
-
-    </div>)
+      </div>
+    )
 
 }
