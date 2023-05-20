@@ -3,6 +3,7 @@ import Map from './components/Map';
 import { useNavigate } from 'react-router-dom';
 
 import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 export default function MapPage()  {
@@ -22,7 +23,7 @@ export default function MapPage()  {
                     <IconButton
                         onClick={handleDoneClick}
                     >
-                    done
+                    <ArrowBackIosNewIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
