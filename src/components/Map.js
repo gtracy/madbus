@@ -16,6 +16,7 @@ const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
 
 export default function Map(user) {
     const markerIcon = "/img/black-outline.png";
+    const activeIcon = "/img/red-outline.png";
     const mapOptions = {
         disableDefaultUI: true,
         zoomControl:true,
@@ -65,14 +66,21 @@ export default function Map(user) {
                 options={mapOptions}
                 clickableIcons={false}
             >
-                {stops.map((s) => (
-                    <Marker
-                      onClick={() => handleMarkerClick(s)}
-                      key={s.stopID}
-                      position={{lat:parseFloat(s.lat),lng:parseFloat(s.lon)}}
-                      icon={{url:markerIcon,scaledSize:new window.google.maps.Size(25,15)}}
-                    />
-                ))}
+
+                {stops.map((s) => {
+                    const iconImage = bookmarks.find((bookmark) => bookmark.stopID === s.stopID) 
+                        ? activeIcon 
+                        : markerIcon;
+
+                    return(
+                        <Marker
+                            onClick={() => handleMarkerClick(s)}
+                            key={s.stopID}
+                            position={{lat:parseFloat(s.lat),lng:parseFloat(s.lon)}}
+                            icon={{url:iconImage,scaledSize:new window.google.maps.Size(25,15)}}
+                        />
+                    )
+                })}
 
                 {selectedMarker && (
                     <InfoWindow
