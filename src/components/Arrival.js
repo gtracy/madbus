@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Box, Typography, LinearProgress } from '@mui/material';
 import ArrowRight from '@mui/icons-material/ArrowRight';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { makeStyles } from '@mui/styles';
 
 import TransitAPI from '../transit-api';
@@ -20,6 +21,10 @@ const useStyles = makeStyles({
         padding: 0,
         margin: 0,
         lineHeight: .5
+    },
+    largeIcon: {
+        height: 96,
+        width: 96
     }
 });
 
@@ -39,42 +44,58 @@ function ArrivalCountdown({routes}) {
 
     let routeid = ' ';
     let destination = ' ';
-    let minutes = '--'
+    let minutes = undefined;
+    let minuteLabel = 'minutes';
 
     if( routes.length > 0 ) {
-        //nextArrival = result[0].minutes;
         if( routes[0].minutes === 0 ) {
             minutes = 'here!';
+            minuteLabel = '';
         } else {
             minutes = routes[0].minutes;
+            if( minutes === 1 ) {
+                minuteLabel = 'minute';
+            }
         }
         routeid = routes[0].routeID;
         destination = routes[0].destination;
     }
 
 
-    return(
-        <Box 
-            display="flex" 
-            flexDirection="column"
-            className={classes.containerDetails}
-            sx={{ 
-                bgcolor: '#0fe00f',
-            }}
-        >
-            <Typography variant="body2"
-              sx={{ display: 'flex', alignItems: 'center' }}
-            >
-                Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
-            </Typography>
+    return(<Box>
 
-            <Typography variant="h1">
-                {minutes}
-            </Typography>
-            <Typography variant="caption">minutes</Typography>
+            {minutes
+                ? <Box
+                    display="flex" 
+                    flexDirection="column"
+                    className={classes.containerDetails}
+                 >
+                    <Typography variant="body2"
+                        sx={{ display: 'flex', alignItems: 'center' }}
+                    >
+                        Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
+                    </Typography>
 
-        </Box>
-    )
+                    <Typography 
+                        variant="h1"
+                        sx={{ display: 'flex', alignItems: 'center' }}
+                    >
+                        {minutes}  
+                    </Typography>
+                    <Typography variant="caption">{minuteLabel}</Typography>
+                </Box>
+                : <Box
+                    display="flex" 
+                    flexDirection="column"
+                    className={classes.containerDetails}
+                 >
+                    <SentimentVeryDissatisfiedIcon className={classes.largeIcon}/>
+
+                    <Typography variant="subtitle1">no routes coming at this stop</Typography>
+                 </Box>
+            }
+
+    </Box>)
 }
 
 function UpcomingArrivals({routes}) {
@@ -95,38 +116,42 @@ function UpcomingArrivals({routes}) {
         const key = r.routeID+"."+r.minutes;
         arrivals.push(
             <React.Fragment key={key}>
-            <tr sx={{ padding:'0px',margin:'0px'}}>
-                <td>
-                    <Typography variant="h7"
-                       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                    >
-                        route {r.routeID}
-                    </Typography>
-                    <Typography variant="h5"
+                <tr sx={{ padding:'0px',margin:'0px'}}>
+                    <td>
+                        <Typography variant="h7"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                    >
-                        {r.minutes}min
-                    </Typography>
-                </td>
-                <td>
-                    <ArrowRight fontSize="small"
-                    sx={{ minWidth: '20px'}}
-                    />
-                </td>
-                <td>
-                    <Typography variant="body2">
-                        {prettyDestination(r.destination)}
-                    </Typography>
-                </td>
-            </tr>
-            <tr sx={{ padding:'0px',margin:'0px'}}>
-                <td colSpan={3}>
-                    <hr style={{padding:0,margin:0}}/>
-                </td>
-            </tr>
+                        >
+                            route {r.routeID}
+                        </Typography>
+                        <Typography variant="h5"
+                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                            {r.minutes}min
+                        </Typography>
+                    </td>
+                    <td>
+                        <ArrowRight 
+                            fontSize="small"
+                            sx={{ minWidth: '20px'}}
+                        />
+                    </td>
+                    <td>
+                        <Box >
+                        <Typography variant="body2" sx={{maxWidth:'55vw'}}>
+                            {prettyDestination(r.destination)}
+                        </Typography>
+                        </Box>
+                    </td>
+                </tr>
+                <tr sx={{ padding:'0px',margin:'0px'}}>
+                    <td colSpan={3}>
+                        <hr style={{padding:0,margin:0}}/>
+                    </td>
+                </tr>
             </React.Fragment>
         );
     });
+
     if( more_coming ) {
         arrivals.push(
             <tr key={'more-coming'} sx={{ padding:'0px',margin:'0px'}}>
@@ -146,6 +171,7 @@ function UpcomingArrivals({routes}) {
             display="flex" 
             flexDirection="column"
             className={classes.containerDetails}
+            sx={{marginTop:2}}
         >
         <table>
             <tbody>
@@ -181,15 +207,14 @@ export default function Arrival({activeStopID,refresh}) {
             display="flex"
             flexDirection="column"
             sx={{
-                bgcolor: '#0fe8fc',
                 marginTop: '5vh',
             }}
         >
             {loading ? (
                 <LinearProgress className={classes.containerDetails}/>
             ) : (<div>
-            <ArrivalCountdown routes={arrivals}/>
-            <UpcomingArrivals routes={arrivals}/>
+                <ArrivalCountdown routes={arrivals}/>
+                <UpcomingArrivals routes={arrivals}/>
             </div>)}
         </Box>
     )
