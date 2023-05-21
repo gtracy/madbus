@@ -11,6 +11,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import { useBookmarks } from '../bookmarks';
 
@@ -20,16 +22,23 @@ const useStyles = makeStyles({
         margin: '0px 0px 0px 4px',
         minHeight: '12px'
     },
+    deleteButton: {
+        padding: '0px 4px 0px 0px',
+        margin: '0px',
+        minWidth: '12px',
+    }
   });
   
 
 export default function StopList({handleSelection}) {
-    const { bookmarks } = useBookmarks();
+    const { bookmarks, setBookmarks } = useBookmarks();
     const navigate = useNavigate();
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [showDeleteButtons, setShowDeleteButtons] = useState(false);
+
     const open = Boolean(anchorEl);
 
     const handleClickListItem = (event) => {
@@ -46,8 +55,20 @@ export default function StopList({handleSelection}) {
         setAnchorEl(null);
     };
 
+    const handleDeleteClick = (stopID,index) => {
+        console.log('delete: '+stopID);
+        console.log('remove from list: '+bookmarks.length);
+        setBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== stopID));
+        console.log('remove from list: '+bookmarks.length);
+        setSelectedIndex(0);
+        handleSelection(bookmarks[0].stopID);
+    }
+    
     const handleMenuAddClick = (event) => {
         navigate('/map');
+    }
+    const handleMenuEditClick = () => {
+        setShowDeleteButtons(!showDeleteButtons);
     }
 
     return (
@@ -75,18 +96,30 @@ export default function StopList({handleSelection}) {
                 <MenuItem
                     key={stop.stopID}
                     selected={index === selectedIndex}
-                    onClick={(event) => handleMenuItemClick(event, index)}
                 >
-                    <Typography variant="subtitle1"
-                       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                    >                        
-                        {stop.stopID} 
-                        <PlaceOutlinedIcon 
-                            sx={{ minWidth: '40px'}}
-                            fontSize='small'
-                        /> 
-                        {stop.intersection}
-                    </Typography>
+                    {showDeleteButtons && (
+                        <Button 
+                            className={classes.deleteButton}
+                            color="primary" 
+                            onClick={(event) => handleDeleteClick(stop.stopID, index)}>
+                            <DeleteIcon />
+                        </Button>
+                    )}
+
+                    <Button
+                        onClick={(event) => handleMenuItemClick(event, index)}
+                    >
+                        <Typography variant="subtitle2"
+                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >                        
+                            {stop.stopID} 
+                            <PlaceOutlinedIcon 
+                                sx={{ minWidth: '30px'}}
+                                fontSize='small'
+                            /> 
+                            {stop.intersection}
+                        </Typography>
+                    </Button>
                 </MenuItem>
             ))}
             <hr/>
@@ -96,12 +129,23 @@ export default function StopList({handleSelection}) {
                     <Typography ml={1}>Add</Typography>
                 </Button>
             </MenuItem>
-            <MenuItem className={classes.menuAction}>
-                <Button onClick={handleMenuAddClick}>
-                    <EditLocationAltIcon/>
-                    <Typography ml={1}>Edit</Typography>                
-                </Button>
-            </MenuItem>
+            {!showDeleteButtons ? <div>
+                <MenuItem className={classes.menuAction}>
+                    <Button onClick={handleMenuEditClick}>
+                        <EditLocationAltIcon/>
+                        <Typography ml={1}>Edit</Typography>
+                    </Button>
+                </MenuItem>
+            </div> : <div>
+                <MenuItem className={classes.menuAction}>
+                    <Button onClick={handleMenuEditClick}>
+                        <CheckCircleIcon
+                            color="success"
+                        />
+                        <Typography ml={1}>Done</Typography>
+                    </Button>
+                </MenuItem>
+            </div>}
         </Menu>
         </div>
     );

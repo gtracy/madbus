@@ -16,10 +16,7 @@ function BookmarkProvider({ children }) {
   
     function getBookmarks() {
         const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-        console.dir('getBookmarks: ' + bookmarks);
         if (!bookmarks) {
-            //setBookmarksState(bookmarkDefaults);
-            console.log('... returning defaults');
             return bookmarkDefaults;
         } else {
             return bookmarks;
@@ -27,7 +24,6 @@ function BookmarkProvider({ children }) {
     }
     
     useEffect(() => {
-        console.log('BookmarkProvider: '+bookmarks.length);
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }, [bookmarks]);
   
