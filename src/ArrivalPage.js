@@ -4,7 +4,7 @@ import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 
-import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
+import { Paper, AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
 export default function ArrivalPage()  {
 
@@ -18,9 +18,8 @@ export default function ArrivalPage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return(
-      <div>
-        <Box sx={{ flexGrow: 1 }}>
+    return(<div>
+        <Box>
             <AppBar 
                 position="static"
                 elevation={0}
@@ -37,11 +36,11 @@ export default function ArrivalPage()  {
         </Box>
 
         <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
-
+      
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>
             <Typography variant="subtitle2">
-              please send me your feedback <span>&#x1F64F;</span>
+              send me <a href="mailto:gtracy+madbus@gmail.com?subject=madbus feedback">feedback</a> <span>&#x1F64F;</span>
             </Typography>
           </Toolbar>
         </AppBar>

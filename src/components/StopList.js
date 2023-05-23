@@ -48,18 +48,17 @@ export default function StopList({handleSelection}) {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index);
         setAnchorEl(null);
+        setShowDeleteButtons(false);
         handleSelection(bookmarks[index].stopID)
     };
 
     const handleClose = () => {
         setAnchorEl(null);
+        setShowDeleteButtons(false);
     };
 
     const handleDeleteClick = (stopID,index) => {
-        console.log('delete: '+stopID);
-        console.log('remove from list: '+bookmarks.length);
         setBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== stopID));
-        console.log('remove from list: '+bookmarks.length);
         setSelectedIndex(0);
         handleSelection(bookmarks[0].stopID);
     }

@@ -23,7 +23,7 @@ export default function MapPage()  {
                     <IconButton
                         onClick={handleDoneClick}
                     >
-                    <ArrowBackIosNewIcon/>
+                    <ArrowBackIosNewIcon color="secondary"/>
                     </IconButton>
                 </Toolbar>
             </AppBar>

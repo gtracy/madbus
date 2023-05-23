@@ -65,23 +65,18 @@ function ArrivalCountdown({routes}) {
     return(<Box>
 
             {minutes
-                ? <Box
+                ? <Box mt={0} mb={2}
                     display="flex" 
                     flexDirection="column"
                     className={classes.containerDetails}
                  >
                     <Typography variant="body2"
-                        sx={{ display: 'flex', alignItems: 'center' }}
+                        sx={{ display: 'flex', alignItems: 'center', maxWidth:'60hw' }}
                     >
                         Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
                     </Typography>
 
-                    <Typography 
-                        variant="h1"
-                        sx={{ display: 'flex', alignItems: 'center' }}
-                    >
-                        {minutes}  
-                    </Typography>
+                    <Typography variant="h1">{minutes}</Typography>
                     <Typography variant="caption">{minuteLabel}</Typography>
                 </Box>
                 : <Box
@@ -207,7 +202,7 @@ export default function Arrival({activeStopID,refresh}) {
             display="flex"
             flexDirection="column"
             sx={{
-                marginTop: '5vh',
+                marginTop: '3vh',
             }}
         >
             {loading ? (
