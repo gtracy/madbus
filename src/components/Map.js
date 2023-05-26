@@ -23,7 +23,7 @@ export default function Map(user) {
         disableDefaultUI: true,
         zoomControl:true,
         styles: mapStyle
-    }
+    };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
     const [stops,setStops] = useState([]);
@@ -84,7 +84,7 @@ export default function Map(user) {
                             onClick={() => handleMarkerClick(s)}
                             key={s.stopID}
                             position={{lat:parseFloat(s.lat),lng:parseFloat(s.lon)}}
-                            icon={{url:iconImage,scaledSize:new window.google.maps.Size(25,15)}}
+                            icon={{url:iconImage,scaledSize:new window.google.maps.Size(32,21.65)}}
                         />
                     )
                 })}
@@ -102,7 +102,7 @@ export default function Map(user) {
                                 {selectedMarker.direction}
                             </Typography>
                             <Typography variant="subtitle2">
-                                Stop #{selectedMarker.stopID}
+                                Stop #{selectedMarker.stop_code}
                             </Typography>
 
                             {bookmarks.find((bookmark) => bookmark.stopID === selectedMarker.stopID) ? (<div>

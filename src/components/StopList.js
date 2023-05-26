@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
@@ -92,7 +92,7 @@ export default function StopList({handleSelection}) {
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
                     primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
-                    primary={bookmarks[selectedIndex].stopID}
+                    primary={bookmarks[selectedIndex].stop_code}
                     secondary={bookmarks[selectedIndex].intersection}
                 />
             </ListItem>
@@ -123,7 +123,7 @@ export default function StopList({handleSelection}) {
                         <Typography variant="subtitle2"
                             sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >                        
-                            {stop.stopID} 
+                            {stop.stop_code} 
                             <PlaceOutlinedIcon 
                                 sx={{ minWidth: '30px'}}
                                 fontSize='small'
