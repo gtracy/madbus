@@ -7,12 +7,14 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 
 import { useBookmarks } from '../bookmarks';
+import { gaEvents } from '../analytics';
 
 import { mapStyle } from "../map_style";
 
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI('madbus');
 const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
+
 
 export default function Map(user) {
     const markerIcon = "/img/black-outline.png";
@@ -33,15 +35,20 @@ export default function Map(user) {
     });
 
     const handleMarkerClick = (marker) => {
+        gaEvents.buttonClick("map marker open");
+
         setSelectedMarker(marker);
     };
     
     const handleCloseInfoWindow = () => {
+        gaEvents.buttonClick("map marker close");
+
         setSelectedMarker(null);
     };
 
     const updateBookmarks = (stopList) => {
-        console.dir(stopList.length);
+        gaEvents.buttonClick("map bookmark edit");
+
         setBookmarks(stopList);
     };
     

@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
 import { Button, List, ListItem, ListItemText} from '@mui/material';
-import { Box, Menu, MenuItem} from '@mui/material';
+import { Menu, MenuItem} from '@mui/material';
 import { Typography } from '@mui/material';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -15,6 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import { useBookmarks } from '../bookmarks';
+import { gaEvents } from '../analytics';
+
 
 const useStyles = makeStyles({
     menuAction: {
@@ -42,10 +45,13 @@ export default function StopList({handleSelection}) {
     const open = Boolean(anchorEl);
 
     const handleClickListItem = (event) => {
+        gaEvents.buttonClick("stopList dropdown");
         setAnchorEl(event.currentTarget);
     };
 
     const handleMenuItemClick = (event, index) => {
+        gaEvents.buttonClick("stopList picker");
+
         setSelectedIndex(index);
         setAnchorEl(null);
         setShowDeleteButtons(false);
@@ -58,15 +64,21 @@ export default function StopList({handleSelection}) {
     };
 
     const handleDeleteClick = (stopID,index) => {
+        gaEvents.buttonClick("stopList delete item");
+
         setBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== stopID));
         setSelectedIndex(0);
         handleSelection(bookmarks[0].stopID);
     }
     
     const handleMenuAddClick = (event) => {
+        gaEvents.buttonClick("stopList add");
+
         navigate('/map');
     }
     const handleMenuEditClick = () => {
+        if( showDeleteButtons ) gaEvents.buttonClick("stopList edit start");
+        else gaEvents.buttonClick("stopList edit done");
         setShowDeleteButtons(!showDeleteButtons);
     }
 
