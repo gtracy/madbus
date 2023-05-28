@@ -5,11 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
+import { gaEvents } from './analytics';
+
 
 export default function MapPage()  {
     const navigate = useNavigate();
 
     const handleDoneClick = (event) => {
+        gaEvents.buttonClick("map page exit");
         navigate('/');
     }
 
