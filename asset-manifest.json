@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/madbus/static/css/main.9e24f3bd.css",
+    "main.js": "/madbus/static/js/main.6af72fbd.js",
+    "index.html": "/madbus/index.html",
+    "main.9e24f3bd.css.map": "/madbus/static/css/main.9e24f3bd.css.map",
+    "main.6af72fbd.js.map": "/madbus/static/js/main.6af72fbd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e24f3bd.css",
+    "static/js/main.6af72fbd.js"
+  ]
+}
