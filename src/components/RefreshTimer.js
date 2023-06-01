@@ -20,7 +20,7 @@ function CircularProgressWithLabel(props) {
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress 
         variant="determinate"
-        color="inherit"
+        color="secondary"
         {...props} 
       />
       <Box
@@ -61,11 +61,11 @@ export default function RefreshTimer({handleRefresh}) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      let newProgress = computeProgress(progress);
-      if( newProgress === 0 ) {
-        handleRefresh(true);
-      }
-      setProgress(newProgress);
+        let newProgress = computeProgress(progress);
+        if( newProgress === 0 ) {
+          handleRefresh(true);
+        }
+        setProgress(newProgress);
       }, (REFRESH_RATE*1000/10));
     return () => {
       clearInterval(timer);

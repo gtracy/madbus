@@ -4,7 +4,7 @@ import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 
-import { Paper, AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
 export default function ArrivalPage()  {
 
