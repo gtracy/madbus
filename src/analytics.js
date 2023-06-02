@@ -6,8 +6,14 @@ const buttonClick = (action) => ReactGA.event({
     action: action
 })
 
+const eventOccurred = (event) => ReactGA.event({
+    category: "event occurred",
+    action: event
+})
+
 const gaEvents = {
     buttonClick: buttonClick,
+    eventOccurred: eventOccurred
 }
 
 export { gaEvents }
