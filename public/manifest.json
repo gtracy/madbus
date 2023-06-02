@@ -1,10 +1,11 @@
 {
   "short_name": "Madbus",
   "name": "Madison bus finder",
+  "description": "Less is more. A bus finder solution for those that are riding from the same stops every day.",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
@@ -16,10 +17,39 @@
       "src": "img/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "img/512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#f0ebd8"
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+
+  "screenshots": [
+    {
+      "src": "img/Screenshot-arrivals.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "img/Screenshot-bookmarks.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "img/Screenshot-map.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x2340"
+    }
+  ],
+  "categories": [
+    "travel",
+    "transportation",
+    "navigation"
+  ]
 }
