@@ -31,11 +31,7 @@ const theme = createTheme({
       },
       },
     typography: {
-      h4: {
-        fontFamily: 'Raleway',
-      },
       h1: {
-        fontFamily: 'Raleway',
         fontSize: '8.2rem',
         fontWeight: 700,
         lineHeight: 0.75,

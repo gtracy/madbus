@@ -41,7 +41,7 @@ export default function ArrivalPage()  {
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar variant="dense">
             <Typography variant="subtitle2">
-              send me <a href="mailto:gtracy+madbus@gmail.com?subject=madbus feedback">feedback</a> <span>&#x1F64F;</span>
+              <a href="mailto:gtracy+madbus@gmail.com?subject=madbus feedback">feedback</a> <span>&#x1F64F;</span>
             </Typography>
           </Toolbar>
         </AppBar>

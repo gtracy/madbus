@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Box, Typography, LinearProgress } from '@mui/material';
 import ArrowRight from '@mui/icons-material/ArrowRight';
+import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { makeStyles } from '@mui/styles';
 
@@ -111,36 +112,37 @@ function UpcomingArrivals({routes}) {
         const key = r.routeID+"."+r.minutes;
         arrivals.push(
             <React.Fragment key={key}>
-                <tr sx={{ padding:'0px',margin:'0px'}}>
+                <tr>
                     <td>
-                        <Typography variant="h7"
+                        <Typography variant="h6"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                            route {r.routeID}
-                        </Typography>
-                        <Typography variant="h5"
-                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        >
-                            {r.minutes}min
+                            <DirectionsBusIcon size="small"/> {r.routeID}
                         </Typography>
                     </td>
                     <td>
-                        <ArrowRight 
-                            fontSize="small"
-                            sx={{ minWidth: '20px'}}
+                        <ArrowRight
+                            fontSize="medium"
+                            sx={{ minWidth: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                         />
                     </td>
                     <td>
-                        <Box >
-                        <Typography variant="body2" sx={{maxWidth:'55vw'}}>
+                        <Typography variant="body2" sx={{maxWidth:'40vw'}}>
                             {prettyDestination(r.destination)}
                         </Typography>
-                        </Box>
+                    </td>
+                    <td>
+                    <Typography variant="h5"
+                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                            {r.minutes} min
+                        </Typography>
+
                     </td>
                 </tr>
-                <tr sx={{ padding:'0px',margin:'0px'}}>
-                    <td colSpan={3}>
-                        <hr style={{padding:0,margin:0}}/>
+                <tr>
+                    <td colSpan={4}>
+                        <hr />
                     </td>
                 </tr>
             </React.Fragment>
@@ -150,7 +152,7 @@ function UpcomingArrivals({routes}) {
     if( more_coming ) {
         arrivals.push(
             <tr key={'more-coming'} sx={{ padding:'0px',margin:'0px'}}>
-                <td colSpan={3}>
+                <td colSpan={4}>
                     <Typography variant="subtitle2"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
