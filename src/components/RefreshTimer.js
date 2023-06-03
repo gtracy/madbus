@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import AutoModeIcon from '@mui/icons-material/AutoMode';
 
 import { gaEvents } from '../analytics';
 
@@ -37,9 +38,13 @@ function CircularProgressWithLabel(props) {
           justifyContent: 'center',
         }}
       >
-        <Typography variant="caption" component="div" color="text.secondary">
-          {prettyProgressLabel(props.value)}
-        </Typography>
+        { (props.value > 99 ) ?
+          <AutoModeIcon color="secondary"/>
+        :
+          <Typography variant="caption" component="div" color="text.secondary">
+            {prettyProgressLabel(props.value)}
+          </Typography>
+        } 
       </Box>
     </Box>
   );
@@ -57,8 +62,10 @@ CircularProgressWithLabel.propTypes = {
 export default function RefreshTimer({handleRefresh}) {
   const [progress, setProgress] = useState(0);
 
+  // the refresh rate is a clock value, but the progress
+  // circle is based on a "percentage complete" 0-100
   const computeProgress = (prevProgress) => {
-    return (prevProgress >= 100) ? 0 : prevProgress + 10;
+    return (prevProgress >= 100) ? 0 : prevProgress + 1;
   }
 
   useEffect(() => {
@@ -69,11 +76,11 @@ export default function RefreshTimer({handleRefresh}) {
           handleRefresh(true);
         }
         setProgress(newProgress);
-      }, (REFRESH_RATE*1000/10));
+      }, 1000);
     return () => {
       clearInterval(timer);
     };
   });
 
-  return <CircularProgressWithLabel value={progress} />;
+  return <CircularProgressWithLabel value={progress} icon="check"/>;
 }
