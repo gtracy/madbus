@@ -18,13 +18,13 @@ export default function ArrivalPage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return(<div>
-        <Box>
+    return(  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+
             <AppBar 
-                position="static"
+                position="fixed"
                 elevation={0}
             >
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Toolbar sx={{ padding:0, margin:0,justifyContent: 'space-between' }}>
                     <StopList
                         handleSelection={setActiveStopID}
                     />
@@ -33,12 +33,13 @@ export default function ArrivalPage()  {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+
+        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
+          <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
         </Box>
 
-        <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
-      
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
-          <Toolbar>
+          <Toolbar variant="dense">
             <Typography variant="subtitle2">
               send me <a href="mailto:gtracy+madbus@gmail.com?subject=madbus feedback">feedback</a> <span>&#x1F64F;</span>
             </Typography>

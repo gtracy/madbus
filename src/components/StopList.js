@@ -88,7 +88,10 @@ export default function StopList({handleSelection}) {
             component="nav"
             sx={{ bgcolor: 'inherit' }}
         >
-            <ListItem onClick={handleClickListItem}>
+            <ListItem
+                        sx={{ padding:0, paddingLeft:1, margin:0}}
+                        onClick={handleClickListItem}
+            >
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
                     primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              

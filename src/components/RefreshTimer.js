@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 import { gaEvents } from '../analytics';
 
-const REFRESH_RATE = 300; // 30 seconds
+const REFRESH_RATE = 30; // 30 seconds
 
 function prettyProgressLabel(progress) {
   // progress is a value between 0 - 100
