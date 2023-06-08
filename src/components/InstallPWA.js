@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 import { Typography } from "@mui/material";
 
+import { gaEvents } from '../analytics';
 
 const InstallPWA = () => {
   const [supportsPWA, setSupportsPWA] = useState(false);
@@ -34,6 +35,8 @@ const InstallPWA = () => {
   }, []);
 
   const onClick = evt => {
+    gaEvents.buttonClick("app install");
+
     evt.preventDefault();
     if (!promptInstall) {
       return;
