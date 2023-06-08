@@ -1,11 +1,11 @@
 import React, {useState,useEffect,useCallback} from 'react';
 
+import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
+
 import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 import InstallPWA from './components/InstallPWA';
-
-import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 
 export default function ArrivalPage()  {
 

@@ -116,6 +116,11 @@ function UpcomingArrivals({routes}) {
         arrivals.push(
             <React.Fragment key={key}>
                 <tr>
+                    <td colSpan={4}>
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <Typography variant="h6"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -150,17 +155,18 @@ function UpcomingArrivals({routes}) {
                 }
                     </td>
                 </tr>
-                <tr>
-                    <td colSpan={4}>
-                        <hr />
-                    </td>
-                </tr>
             </React.Fragment>
         );
     });
 
     if( more_coming ) {
         arrivals.push(
+            <React.Fragment key={more_coming}>
+            <tr>
+                <td colSpan={4}>
+                    <hr />
+                </td>
+                </tr>
             <tr key={'more-coming'} sx={{ padding:'0px',margin:'0px'}}>
                 <td colSpan={4}>
                     <Typography variant="subtitle2"
@@ -170,6 +176,7 @@ function UpcomingArrivals({routes}) {
                     </Typography>
                 </td>
             </tr>
+            </React.Fragment>
         )
     }
 
