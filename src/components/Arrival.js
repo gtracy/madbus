@@ -10,7 +10,8 @@ import { makeStyles } from '@mui/styles';
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI('madbus');
 
-const MAX_ARRIVALS_SHOWN = 6;
+const MAX_ARRIVALS_SHOWN = 20;
+const MAX_MiNUTES_SHOWN = 45;
 
 const useStyles = makeStyles({
     containerDetails: {
@@ -64,33 +65,30 @@ function ArrivalCountdown({routes}) {
 
 
     return(<Box>
+        {minutes
+            ? <Box mt={0} mb={2}
+                display="flex" 
+                flexDirection="column"
+                className={classes.containerDetails}
+                >
+                <Typography variant="body2"
+                    sx={{ display: 'flex', alignItems: 'center', maxWidth:'60hw' }}
+                >
+                    Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
+                </Typography>
 
-            {minutes
-                ? <Box mt={0} mb={2}
-                    display="flex" 
-                    flexDirection="column"
-                    className={classes.containerDetails}
-                 >
-                    <Typography variant="body2"
-                        sx={{ display: 'flex', alignItems: 'center', maxWidth:'60hw' }}
-                    >
-                        Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
-                    </Typography>
-
-                    <Typography variant="h1">{minutes}</Typography>
-                    <Typography variant="caption">{minuteLabel}</Typography>
-                </Box>
-                : <Box
-                    display="flex" 
-                    flexDirection="column"
-                    className={classes.containerDetails}
-                 >
-                    <SentimentVeryDissatisfiedIcon className={classes.largeIcon}/>
-
-                    <Typography variant="subtitle1">no routes coming at this stop</Typography>
-                 </Box>
-            }
-
+                <Typography variant="h1">{minutes}</Typography>
+                <Typography variant="caption">{minuteLabel}</Typography>
+            </Box>
+            : <Box
+                display="flex" 
+                flexDirection="column"
+                className={classes.containerDetails}
+              >
+                <SentimentVeryDissatisfiedIcon className={classes.largeIcon}/>
+                <Typography variant="subtitle1">no routes coming at this stop currently</Typography>
+            </Box>
+        }
     </Box>)
 }
 
@@ -99,7 +97,10 @@ function UpcomingArrivals({routes}) {
 
     let arrivals = [];
     let more_coming = false;
+    
     routes.forEach((r,index) => {
+        let show_clock = false;
+
         // skip the first entry which is already displayed
         // in ArrivalCountdown component
         if( index === 0 ) return;
@@ -107,7 +108,9 @@ function UpcomingArrivals({routes}) {
             more_coming = true;
             return;
         }
-        if( r.minutes > 50 ) return;
+        if( r.minutes > MAX_MiNUTES_SHOWN ) {
+            show_clock = true;
+        }
 
         const key = r.routeID+"."+r.minutes;
         arrivals.push(
@@ -132,12 +135,19 @@ function UpcomingArrivals({routes}) {
                         </Typography>
                     </td>
                     <td>
-                    <Typography variant="h5"
-                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        >
-                            {r.minutes} min
-                        </Typography>
-
+                        {show_clock ?
+                            <Typography variant="body"
+                                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            >
+                                {r.arrivalTime}
+                            </Typography>
+                        :
+                            <Typography variant="h5"
+                                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            >
+                                {r.minutes} min
+                            </Typography>
+                }
                     </td>
                 </tr>
                 <tr>
