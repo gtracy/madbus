@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import './index.css';
-import MadBus from './MadBus';
+import MadTransit from './MadTransit';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <MadBus />
+    <MadTransit />
   </React.StrictMode>,
   document.getElementById('root')
 );

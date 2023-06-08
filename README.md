@@ -1,9 +1,5 @@
-# Madbus
+# MadTransit
 Minimalist interface for finding your Madison bus.
-
-Also my vehicle for learning React so there are likely all sorts of ugly patterns and practices here as I stumble through.
-
-*** under construction ***
 
 ## Developers
 

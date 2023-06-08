@@ -40,7 +40,7 @@ const theme = createTheme({
     },
 });
 
-export default function MadBus() {
+export default function MadTransit() {
 
   return (
     <ThemeProvider theme={theme}>

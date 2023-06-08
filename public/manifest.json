@@ -1,7 +1,7 @@
 {
-  "short_name": "Madbus",
+  "short_name": "MadTransit",
   "name": "Madison bus finder",
-  "description": "Less is more. A bus finder solution for those that are riding from the same stops every day.",
+  "description": "A bus finder app built by a commuter. For commuters. A bus finder solution for those that are riding from the same stops every day.",
   "icons": [
     {
       "src": "favicon.ico",
