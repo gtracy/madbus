@@ -1,7 +1,7 @@
 {
   "short_name": "MadTransit",
   "name": "MadTransit",
-  "description": "A bus finder app built by a commuter. For commuters. A bus finder solution for those that are riding from the same stops every day.",
+  "description": "A bus finder app built by a commuter. For commuters. This lightweight app helps those that are riding from the same stops every day.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -33,18 +33,18 @@
   "screenshots": [
     {
       "src": "img/Screenshot-arrivals.png",
-      "type": "image/jpeg",
-      "sizes": "1080x2340"
+      "type": "image/png",
+      "sizes": "1000x1390"
     },
     {
       "src": "img/Screenshot-bookmarks.png",
-      "type": "image/jpeg",
-      "sizes": "1080x2340"
+      "type": "image/png",
+      "sizes": "1000x1390"
     },
     {
       "src": "img/Screenshot-map.png",
-      "type": "image/jpeg",
-      "sizes": "1080x2340"
+      "type": "image/png",
+      "sizes": "1002x1400"
     }
   ],
   "categories": [
