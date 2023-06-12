@@ -18,7 +18,7 @@ const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
 
 export default function Map(user) {
     const markerIcon = "/img/black-outline.png";
-    const activeIcon = "/img/red-outline.png";
+    const activeIcon = "/img/red-outline.png";      
     const mapOptions = {
         disableDefaultUI: true,
         zoomControl:true,
@@ -28,7 +28,11 @@ export default function Map(user) {
     const { bookmarks, setBookmarks } = useBookmarks();
     const [stops,setStops] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    const [center] = useState(MADISON_MAP_CENTER);
+    const [center, setCenter] = useState(MADISON_MAP_CENTER);
+    const [blueDotIcon, setBlueDotIcon] = useState({
+        url: `data:image/svg+xml;utf-8,${encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2196f3" width="24" height="24"><path d="M0 0h24v24H0V0z" fill="none" /><circle cx="12" cy="12" r="8" /></svg>`
+        )}`});
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
@@ -58,8 +62,30 @@ export default function Map(user) {
                 setStops(result);
             })
             .catch(error => {
-                // no-op
+                console.log('ERROR: unable to load stop data');
+                gaEvents.eventOccurred('stop data load fail');
             })
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setCenter({ lat: latitude, lng: longitude });
+                },
+                (error) => {
+                    console.error("Error retrieving user location:", error);
+                }
+            );
+        }
+        if( isLoaded ) {
+            setBlueDotIcon({
+                url: `data:image/svg+xml;utf-8,${encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2196f3" width="24" height="24"><path d="M0 0h24v24H0V0z" fill="none" /><circle cx="12" cy="12" r="8" /></svg>`
+                )}`,
+                scaledSize: new window.google.maps.Size(22, 22)
+            });
+        }    
+          
     },[stops])
 
     if(!isLoaded) return <div>loading...</div>;
@@ -73,6 +99,9 @@ export default function Map(user) {
                 options={mapOptions}
                 clickableIcons={false}
             >
+                {center !== MADISON_MAP_CENTER && (
+                    <Marker position={center} icon={blueDotIcon} />
+                )}
 
                 {stops.map((s) => {
                     const iconImage = bookmarks.find((bookmark) => bookmark.stopID === s.stopID) 
