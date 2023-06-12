@@ -32,17 +32,17 @@
 
   "screenshots": [
     {
-      "src": "img/Screenshot-arrivals.jpg",
+      "src": "img/Screenshot-arrivals.png",
       "type": "image/jpeg",
       "sizes": "1080x2340"
     },
     {
-      "src": "img/Screenshot-bookmarks.jpg",
+      "src": "img/Screenshot-bookmarks.png",
       "type": "image/jpeg",
       "sizes": "1080x2340"
     },
     {
-      "src": "img/Screenshot-map.jpg",
+      "src": "img/Screenshot-map.png",
       "type": "image/jpeg",
       "sizes": "1080x2340"
     }
