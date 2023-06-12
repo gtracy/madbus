@@ -32,19 +32,19 @@
 
   "screenshots": [
     {
-      "src": "img/Screenshot-arrivals.png",
-      "type": "image/png",
-      "sizes": "1000x1390"
+      "src": "img/Screenshot-arrivals.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1974"
     },
     {
-      "src": "img/Screenshot-bookmarks.png",
-      "type": "image/png",
-      "sizes": "1000x1390"
+      "src": "img/Screenshot-bookmarks.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1970"
     },
     {
-      "src": "img/Screenshot-map.png",
-      "type": "image/png",
-      "sizes": "1002x1400"
+      "src": "img/Screenshot-map.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1970"
     }
   ],
   "categories": [
