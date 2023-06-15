@@ -1,7 +1,7 @@
 # MadTransit
 Minimalist interface for finding your Madison bus.
 
-[https://madisonbus.org](madisonbus.org)
+[madisonbus.org](https://madisonbus.org)
 
 ## Developers
 
