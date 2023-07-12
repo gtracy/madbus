@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
-import { Button, List, ListItem, ListItemText} from '@mui/material';
+import { Box, Button, List, ListItem, ListItemText} from '@mui/material';
 import { Menu, MenuItem} from '@mui/material';
 import { Typography } from '@mui/material';
 
@@ -89,8 +89,8 @@ export default function StopList({handleSelection}) {
             sx={{ bgcolor: 'inherit' }}
         >
             <ListItem
-                        sx={{ padding:0, paddingLeft:1, margin:0}}
-                        onClick={handleClickListItem}
+                sx={{ padding:0, paddingLeft:1, margin:0}}
+                onClick={handleClickListItem}
             >
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
@@ -121,9 +121,13 @@ export default function StopList({handleSelection}) {
                     )}
 
                     <Button
+                        sx={{paddingTop: 0, paddingBottom:0}}
                         onClick={(event) => handleMenuItemClick(event, index)}
                     >
-                        <Typography variant="subtitle2"
+                        <Box sx={{ margin: 0, padding:0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+
+                        <Typography 
+                            variant="subtitle2"
                             sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >                        
                             {stop.stop_code} 
@@ -131,8 +135,16 @@ export default function StopList({handleSelection}) {
                                 sx={{ minWidth: '30px'}}
                                 fontSize='small'
                             /> 
-                            {stop.intersection}
+                            {stop.intersection} 
                         </Typography>
+                        <Typography 
+                            variant="caption" 
+                            sx={{ fontSize: '10px' }}
+                        >
+                            {stop.direction}
+                        </Typography>
+
+                        </Box>
                     </Button>
                 </MenuItem>
             ))}
