@@ -135,7 +135,7 @@ export default function StopList({handleSelection}) {
                                 sx={{ minWidth: '30px'}}
                                 fontSize='small'
                             /> 
-                            {stop.intersection} 
+                            {stop.intersection}
                         </Typography>
                         <Typography 
                             variant="caption" 

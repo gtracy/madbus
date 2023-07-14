@@ -31,6 +31,11 @@ function BookmarkProvider({ children }) {
         if (!Array.isArray(stopList)) {
             console.log('ERROR: stop list needs to be a list');
         } else {
+            // never let the user remove the last bookmark. if the 
+            // list is empty, inject the defaults
+            if( stopList.length === 0 ) {
+                stopList = bookmarkDefaults;
+            }
             setBookmarksState(stopList);
         }
     };
