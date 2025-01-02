@@ -22,7 +22,8 @@ export default function Map(user) {
     const mapOptions = {
         disableDefaultUI: true,
         zoomControl:true,
-        styles: mapStyle
+        mapId: "cfc5ed8b557fa102"
+        //styles: mapStyle
     };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
