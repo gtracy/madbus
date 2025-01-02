@@ -36,7 +36,7 @@ export default function Map(user) {
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
-        mapId: "cfc5ed8b557fa102"
+        mapId: "fd98114ed2bf7af4"
     });
 
     const handleMarkerClick = (marker) => {
