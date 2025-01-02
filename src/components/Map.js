@@ -22,8 +22,7 @@ export default function Map(user) {
     const mapOptions = {
         disableDefaultUI: true,
         zoomControl:true,
-        mapId: "cfc5ed8b557fa102"
-        //styles: mapStyle
+        styles: []
     };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
@@ -37,6 +36,7 @@ export default function Map(user) {
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
+        mapId: "cfc5ed8b557fa102"
     });
 
     const handleMarkerClick = (marker) => {
