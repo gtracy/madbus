@@ -22,7 +22,8 @@ export default function Map(user) {
     const mapOptions = {
         disableDefaultUI: true,
         zoomControl:true,
-        styles: []
+        mapId: "fd98114ed2bf7af4"
+        //styles: []
     };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
@@ -35,8 +36,7 @@ export default function Map(user) {
         )}`});
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM",
-        mapId: "fd98114ed2bf7af4"
+        googleMapsApiKey: "AIzaSyBkV6li0Y-jN20Hb4zqprY0fsrogRX5LiM"
     });
 
     const handleMarkerClick = (marker) => {
