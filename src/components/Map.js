@@ -9,8 +9,6 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { useBookmarks } from '../bookmarks';
 import { gaEvents } from '../analytics';
 
-import { mapStyle } from "../map_style";
-
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI('madbus');
 const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
@@ -87,7 +85,7 @@ export default function Map(user) {
             });
         }    
           
-    },[stops])
+    },[stops,isLoaded])
 
     if(!isLoaded) return <div>loading...</div>;
 

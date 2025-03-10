@@ -1,6 +1,6 @@
 
 const TRANSIT_API_ENDPOINT = "https://api.smsmybus.com/v1";
-const MOCK_ON_ERROR = false;
+const MOCK_ON_ERROR = true;
 const mock_route_data = [
     {routeID:'XX',minutes:5,destination:'WEST TRANSFER VIA SHERMAN'},
     {routeID:'02',minutes:8,destination:'WEST TRANSFER VIA SHERMAN'},
@@ -32,6 +32,7 @@ export default class TransitAPI {
         try {
             const raw = await fetch(endpoint);
             const result = await raw.json();
+            console.dir(result);
 
             if( result.status === "0" ) {
                 return result.stop.route;
@@ -42,6 +43,7 @@ export default class TransitAPI {
             }
         } catch(e) {
             if( MOCK_ON_ERROR ) {
+                console.log('*********** mocking data ************');
                 return mock_route_data;
             } else {
                 console.log(e);
@@ -50,34 +52,37 @@ export default class TransitAPI {
 
     }
 
-    getStops = async() => {
-        let endpoint = TRANSIT_API_ENDPOINT + "/getstops?key=" + this.devkey
-
-        if( this.stop_details ) {
+    getStops = async () => {
+        if (this.stop_details) {
             return this.stop_details;
         } else {
             try {
-                const raw = await fetch(endpoint);
-                const result = await raw.json();
+                const response = await fetch('stops.json');
     
-                if( result.status === "0" ) {
-                    this.stop_details = result.stops;
-                    return result.stops;
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+    
+                if (Array.isArray(result)) { 
+                    this.stop_details = result;
+                    console.dir(this.stop_details);
+                    return result;
                 } else {
-                    console.error('API is returning an error. :(');
-                    console.dir(result);    
+                    console.error('JSON data is invalid. Expected an array.');
+                    console.dir(result);
                     return [];
                 }
-            } catch(e) {
-                if( MOCK_ON_ERROR ) {
+            } catch (e) {
+                if (MOCK_ON_ERROR) {
                     return mock_stop_data;
                 } else {
-                    console.log(e);
+                    console.error('Error fetching or parsing JSON:', e);
+                    return [];
                 }
             }
-    
         }
-    }
+    };
 
     getStopLocation = (stopid) => {
         return {};
