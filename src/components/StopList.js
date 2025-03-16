@@ -55,7 +55,7 @@ export default function StopList({handleSelection}) {
         setSelectedIndex(index);
         setAnchorEl(null);
         setShowDeleteButtons(false);
-        handleSelection(bookmarks[index].stopID)
+        handleSelection(bookmarks[index].stop_code)
     };
 
     const handleClose = () => {
@@ -63,12 +63,12 @@ export default function StopList({handleSelection}) {
         setShowDeleteButtons(false);
     };
 
-    const handleDeleteClick = (stopID,index) => {
+    const handleDeleteClick = (stop_code,index) => {
         gaEvents.buttonClick("stopList delete item");
 
-        setBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== stopID));
+        setBookmarks(bookmarks.filter(bookmark => bookmark.stop_code !== stop_code));
         setSelectedIndex(0);
-        handleSelection(bookmarks[0].stopID);
+        handleSelection(bookmarks[0].stop_code);
     }
     
     const handleMenuAddClick = (event) => {
@@ -108,14 +108,14 @@ export default function StopList({handleSelection}) {
         >
             {bookmarks.map((stop, index) => (
                 <MenuItem
-                    key={stop.stopID}
+                    key={stop.stop_code}
                     selected={index === selectedIndex}
                 >
                     {showDeleteButtons && (
                         <Button 
                             className={classes.deleteButton}
                             color="primary" 
-                            onClick={(event) => handleDeleteClick(stop.stopID, index)}>
+                            onClick={(event) => handleDeleteClick(stop.stop_code, index)}>
                             <DeleteIcon />
                         </Button>
                     )}
