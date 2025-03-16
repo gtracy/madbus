@@ -9,10 +9,8 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { useBookmarks } from '../bookmarks';
 import { gaEvents } from '../analytics';
 
-import { mapStyle } from "../map_style";
-
 import TransitAPI from '../transit-api';
-const transit = new TransitAPI('madbus');
+const transit = new TransitAPI();
 const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
 
 
@@ -23,7 +21,6 @@ export default function Map(user) {
         disableDefaultUI: true,
         zoomControl:true,
         mapId: "fd98114ed2bf7af4"
-        //styles: []
     };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
@@ -87,7 +84,7 @@ export default function Map(user) {
             });
         }    
           
-    },[stops])
+    },[stops,isLoaded])
 
     if(!isLoaded) return <div>loading...</div>;
 
@@ -105,14 +102,14 @@ export default function Map(user) {
                 )}
 
                 {stops.map((s) => {
-                    const iconImage = bookmarks.find((bookmark) => bookmark.stopID === s.stopID) 
+                    const iconImage = bookmarks.find((bookmark) => bookmark.stop_code === s.stop_code) 
                         ? activeIcon 
                         : markerIcon;
 
                     return(
                         <Marker
                             onClick={() => handleMarkerClick(s)}
-                            key={s.stopID}
+                            key={s.stop_code}
                             position={{lat:parseFloat(s.lat),lng:parseFloat(s.lon)}}
                             icon={{url:iconImage,scaledSize:new window.google.maps.Size(32,21.65)}}
                         />
@@ -135,11 +132,11 @@ export default function Map(user) {
                                 Stop #{selectedMarker.stop_code}
                             </Typography>
 
-                            {bookmarks.find((bookmark) => bookmark.stopID === selectedMarker.stopID) ? (<div>
+                            {bookmarks.find((bookmark) => bookmark.stop_code === selectedMarker.stop_code) ? (<div>
                                 <Button
                                     sx={{ minWidth: 0, paddingLeft: 0, marginLeft: 0 }}
                                     color="primary"
-                                    onClick={() => updateBookmarks(bookmarks.filter(bookmark => bookmark.stopID !== selectedMarker.stopID))}
+                                    onClick={() => updateBookmarks(bookmarks.filter(bookmark => bookmark.stop_code !== selectedMarker.stop_code))}
                                 >
                                     <BookmarkAddedIcon
                                         fontSize="medium"
