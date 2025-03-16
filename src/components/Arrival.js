@@ -8,7 +8,7 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import { makeStyles } from '@mui/styles';
 
 import TransitAPI from '../transit-api';
-const transit = new TransitAPI('madbus');
+const transit = new TransitAPI();
 
 const MAX_ARRIVALS_SHOWN = 20;
 const MAX_MiNUTES_SHOWN = 45;

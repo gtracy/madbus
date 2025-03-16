@@ -1,8 +1,8 @@
 
-const TRANSIT_API_ENDPOINT = "https://api.smsmybus.com/v1";
-const MOCK_ON_ERROR = true;
+const TRANSIT_API_ENDPOINT = "https://oup73vr3s1.execute-api.us-east-2.amazonaws.com/prod";
+const TRANSIT_API_KEY = process.env.REACT_APP_TRANSIT_API_KEY;
+const MOCK_ON_ERROR = false;
 const mock_route_data = [
-    {routeID:'XX',minutes:5,destination:'WEST TRANSFER VIA SHERMAN'},
     {routeID:'02',minutes:8,destination:'WEST TRANSFER VIA SHERMAN'},
     {routeID:'08',minutes:10,destination:'SPRING HARBOR'},
     {routeID:'04',minutes:12,destination:'SOUTH TRANSFER'},
@@ -18,13 +18,13 @@ const mock_stop_data = [
 
 
 export default class TransitAPI {
-    constructor(devkey) {
-        this.devkey = devkey;
-        this.stop_details = undefined;//mock_stop_data;
+    constructor() {
+        this.devkey = TRANSIT_API_KEY;
+        this.stop_details = undefined;
     }
 
     getArrivals = async (stopid,routeid) => {
-        let endpoint = TRANSIT_API_ENDPOINT + "/getarrivals?key=" + this.devkey + "&stopID=" + stopid;
+        let endpoint = TRANSIT_API_ENDPOINT + "/v1/getarrivals?key=" + this.devkey + "&stopID=" + stopid;
         if( routeid ) {
             endpoint += "&routeID=" + routeid;
         }
@@ -32,7 +32,6 @@ export default class TransitAPI {
         try {
             const raw = await fetch(endpoint);
             const result = await raw.json();
-            console.dir(result);
 
             if( result.status === "0" ) {
                 return result.stop.route;
@@ -43,10 +42,10 @@ export default class TransitAPI {
             }
         } catch(e) {
             if( MOCK_ON_ERROR ) {
-                console.log('*********** mocking data ************');
                 return mock_route_data;
             } else {
-                console.log(e);
+                console.log('API call threw an error. Is the API down?');
+                return [];
             }
         }
 
@@ -60,6 +59,7 @@ export default class TransitAPI {
                 const response = await fetch('stops.json');
     
                 if (!response.ok) {
+                    console.log('ERROR: unable to load stop data');
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const result = await response.json();

@@ -10,7 +10,7 @@ import { useBookmarks } from '../bookmarks';
 import { gaEvents } from '../analytics';
 
 import TransitAPI from '../transit-api';
-const transit = new TransitAPI('madbus');
+const transit = new TransitAPI();
 const MADISON_MAP_CENTER = { lat:43.0731,lng:-89.3911 };
 
 
@@ -21,7 +21,6 @@ export default function Map(user) {
         disableDefaultUI: true,
         zoomControl:true,
         mapId: "fd98114ed2bf7af4"
-        //styles: []
     };      
 
     const { bookmarks, setBookmarks } = useBookmarks();
