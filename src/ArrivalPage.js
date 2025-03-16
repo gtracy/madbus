@@ -9,7 +9,7 @@ import InstallPWA from './components/InstallPWA';
 
 export default function ArrivalPage()  {
 
-    const [activeStopID,setActiveStopID] = useState('0100');
+    const [activeStopID,setActiveStopID] = useState('0010');
     const [refreshFlag, setRefreshFlag] = useState(false);
 
     const handleRefresh = useCallback(() => {
