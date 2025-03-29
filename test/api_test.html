@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Call Results</title>
+    <style>
+        .api-result {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+        }
+        .api-result h2 {
+            margin-top: 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="api-result">
+    <h2>Metro API: Get Predictions, stop 0010</h2>
+    <div id="metro-api-result">Loading...</div>
+</div>
+
+<div class="api-result">
+    <h2>Greg's Proxy API: Get Predictions, stop 0010</h2>
+    <div id="greg-api-result">Loading...</div>
+</div>
+
+<script>
+    async function fetchData(url, resultElementId) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                // Attempt to get the error message from the response
+                const errorText = await response.text();
+                console.log(errorText);
+                throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
+            }
+            const data = await response.json();
+            document.getElementById(resultElementId).innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        } catch (error) {
+            let errorMessage = "An error occurred while fetching data. Please ensure that the API is accessible and CORS is correctly configured.";
+            if (error.message === 'Failed to fetch') {
+                errorMessage = "Network error. The API might be unavailable, or CORS policy is preventing the request. Please check the console for details.";
+            }
+            document.getElementById(resultElementId).innerHTML = `<p class="error">${errorMessage}</p>`;
+        }
+    }
+    const API_KEY = 'FIXME';
+    const API_ENDPOINT = 'https://fixme.amazonaws.com/prod/v1/getarrivals';
+    if( API_KEY === 'FIXME' ) {
+        const errorMessage = 'you must update the API_KEY in the HTML to run the test';
+        document.getElementById('metro-api-result').innerHTML = `<p class="error">${errorMessage}</p>`;
+        document.getElementById('greg-api-result').innerHTML = `<p class="error">${errorMessage}</p>`;
+    } else {
+        // API Call 1: Get Predictions
+        fetchData('https://metromap.cityofmadison.com/bustime/api/v3/getpredictions?format=json&key='+API_KEY+'&stpid=0010', 'metro-api-result');
+
+        // API Call 2: Get Route List
+        fetchData(API_ENDPOINT+'?stopID=0010&key='+API_KEY, 'greg-api-result');
+    }
+</script>
+
+</body>
+</html>
