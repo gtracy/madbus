@@ -66,7 +66,6 @@ export default class TransitAPI {
     
                 if (Array.isArray(result)) { 
                     this.stop_details = result;
-                    console.dir(this.stop_details);
                     return result;
                 } else {
                     console.error('JSON data is invalid. Expected an array.');

@@ -1,5 +1,5 @@
 
-import Map from './components/Map';
+import MapComponent from './components/Map';
 import { useNavigate } from 'react-router-dom';
 
 import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
@@ -31,7 +31,7 @@ export default function MapPage()  {
                 </Toolbar>
             </AppBar>
         </Box>
-        <Map />
+        <MapComponent />
 
     </div>)
 
