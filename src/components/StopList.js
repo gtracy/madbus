@@ -126,23 +126,23 @@ export default function StopList({handleSelection}) {
                     >
                         <Box sx={{ margin: 0, padding:0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
 
-                        <Typography 
-                            variant="subtitle2"
-                            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        >                        
-                            {stop.stop_code} 
-                            <PlaceOutlinedIcon 
-                                sx={{ minWidth: '30px'}}
-                                fontSize='small'
-                            /> 
-                            {stop.intersection}
-                        </Typography>
-                        <Typography 
-                            variant="caption" 
-                            sx={{ fontSize: '10px' }}
-                        >
-                            {stop.direction}
-                        </Typography>
+                            <Typography 
+                                variant="subtitle2"
+                                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            >                        
+                                {stop.stop_code} 
+                                <PlaceOutlinedIcon 
+                                    sx={{ minWidth: '30px'}}
+                                    fontSize='small'
+                                /> 
+                                {stop.intersection}
+                            </Typography>
+                            <Typography 
+                                variant="caption" 
+                                sx={{ margin: 0, padding: 0, fontSize: '10px' }}
+                            >
+                                {stop.direction}
+                            </Typography>
 
                         </Box>
                     </Button>
