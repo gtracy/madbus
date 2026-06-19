@@ -31,8 +31,8 @@ describe('BookmarkProvider and useBookmarks', () => {
       </BookmarkProvider>
     );
 
-    expect(screen.getByTestId('bookmarks-length').textContent).toBe('4');
-    expect(screen.getByTestId('first-bookmark').textContent).toBe('0200');
+    expect(screen.getByTestId('bookmarks-length').textContent).toBe('3');
+    expect(screen.getByTestId('first-bookmark').textContent).toBe('2389');
   });
 
   test('loads bookmarks from localStorage', () => {
@@ -83,7 +83,7 @@ describe('BookmarkProvider and useBookmarks', () => {
     fireEvent.click(screen.getByText('Clear Bookmarks'));
 
     // Should inject defaults
-    expect(screen.getByTestId('bookmarks-length').textContent).toBe('4');
-    expect(screen.getByTestId('first-bookmark').textContent).toBe('0200');
+    expect(screen.getByTestId('bookmarks-length').textContent).toBe('3');
+    expect(screen.getByTestId('first-bookmark').textContent).toBe('2389');
   });
 });

@@ -31,9 +31,9 @@ describe('StopList Component', () => {
       </MemoryRouter>
     );
 
-    // Initial selected stop is the first default bookmark: "0200"
-    expect(screen.getByText('0200')).toBeInTheDocument();
-    expect(screen.getByText('University & East Campus')).toBeInTheDocument();
+    // Initial selected stop is the first default bookmark: "2389"
+    expect(screen.getByText('2389')).toBeInTheDocument();
+    expect(screen.getByText('Monroe at Leonard')).toBeInTheDocument();
   });
 
   test('opens menu when selected stop list item is clicked', () => {
@@ -46,12 +46,11 @@ describe('StopList Component', () => {
     );
 
     // Click the list item to open the dropdown
-    fireEvent.click(screen.getByText('0200'));
+    fireEvent.click(screen.getByText('2389'));
 
     // Should display other bookmarks in menu
-    expect(screen.getByText(/1787/)).toBeInTheDocument();
-    expect(screen.getByText(/0010/)).toBeInTheDocument();
-    expect(screen.getByText(/0201/)).toBeInTheDocument();
+    expect(screen.getByText(/1100/)).toBeInTheDocument();
+    expect(screen.getByText(/1509/)).toBeInTheDocument();
   });
 
   test('calls handleSelection when a different stop is selected', () => {
@@ -65,12 +64,12 @@ describe('StopList Component', () => {
     );
 
     // Open dropdown
-    fireEvent.click(screen.getByText('0200'));
+    fireEvent.click(screen.getByText('2389'));
 
     // Click on the second stop item
-    fireEvent.click(screen.getByText(/1787/));
+    fireEvent.click(screen.getByText(/1100/));
 
-    expect(handleSelectionMock).toHaveBeenCalledWith('1787');
+    expect(handleSelectionMock).toHaveBeenCalledWith('1100');
   });
 
   test('navigates to map page when Add button is clicked', () => {
@@ -83,7 +82,7 @@ describe('StopList Component', () => {
     );
 
     // Open dropdown
-    fireEvent.click(screen.getByText('0200'));
+    fireEvent.click(screen.getByText('2389'));
 
     // Click Add button
     fireEvent.click(screen.getByText('Add'));
@@ -102,22 +101,22 @@ describe('StopList Component', () => {
     );
 
     // Open dropdown
-    fireEvent.click(screen.getByText('0200'));
+    fireEvent.click(screen.getByText('2389'));
 
     // Click Edit button to toggle delete buttons
     fireEvent.click(screen.getByText('Edit'));
 
-    // Click the delete icon of the second bookmark
+    // Click the delete icon of the first bookmark (which is the active stop '2389')
     const deleteSVGs = screen.getAllByTestId('DeleteIcon');
     expect(deleteSVGs.length).toBeGreaterThan(0);
-    fireEvent.click(deleteSVGs[1]);
+    fireEvent.click(deleteSVGs[0]);
 
-    // Deleting should trigger handleSelection with the new top bookmark (index 0: '0200')
-    expect(handleSelectionMock).toHaveBeenCalledWith('0200');
+    // Deleting the active stop should trigger handleSelection with the new top bookmark (index 0: '1100')
+    expect(handleSelectionMock).toHaveBeenCalledWith('1100');
 
-    // And now our bookmark state has 3 bookmarks instead of 4
+    // And now our bookmark state has 2 bookmarks instead of 3
     const stored = JSON.parse(localStorage.getItem('bookmarks'));
-    expect(stored).toHaveLength(3);
-    expect(stored.find(b => b.stop_code === '1787')).toBeUndefined();
+    expect(stored).toHaveLength(2);
+    expect(stored.find(b => b.stop_code === '2389')).toBeUndefined();
   });
 });

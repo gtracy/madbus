@@ -33,16 +33,20 @@ const useStyles = makeStyles({
   });
   
 
-export default function StopList({handleSelection}) {
+export default function StopList({activeStopID, handleSelection}) {
     const { bookmarks, setBookmarks } = useBookmarks();
     const navigate = useNavigate();
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(0);
     const [showDeleteButtons, setShowDeleteButtons] = useState(false);
 
     const open = Boolean(anchorEl);
+
+    // Compute active stop ID based on activeStopID prop or default to first bookmark
+    const currentActiveStopID = activeStopID || (bookmarks.length > 0 ? bookmarks[0].stop_code : '');
+    const selectedIndex = bookmarks.findIndex(bookmark => bookmark.stop_code === currentActiveStopID);
+    const activeIndex = selectedIndex !== -1 ? selectedIndex : 0;
 
     const handleClickListItem = (event) => {
         gaEvents.buttonClick("stopList dropdown");
@@ -52,7 +56,6 @@ export default function StopList({handleSelection}) {
     const handleMenuItemClick = (event, index) => {
         gaEvents.buttonClick("stopList picker");
 
-        setSelectedIndex(index);
         setAnchorEl(null);
         setShowDeleteButtons(false);
         handleSelection(bookmarks[index].stop_code)
@@ -63,12 +66,18 @@ export default function StopList({handleSelection}) {
         setShowDeleteButtons(false);
     };
 
-    const handleDeleteClick = (stop_code,index) => {
+    const handleDeleteClick = (stop_code, index) => {
         gaEvents.buttonClick("stopList delete item");
 
-        setBookmarks(bookmarks.filter(bookmark => bookmark.stop_code !== stop_code));
-        setSelectedIndex(0);
-        handleSelection(bookmarks[0].stop_code);
+        const newBookmarks = bookmarks.filter(bookmark => bookmark.stop_code !== stop_code);
+        setBookmarks(newBookmarks);
+
+        if (stop_code === currentActiveStopID) {
+            const nextStopCode = newBookmarks.length > 0
+                ? newBookmarks[0].stop_code
+                : '2389'; // fallback stop code
+            handleSelection(nextStopCode);
+        }
     }
     
     const handleMenuAddClick = (event) => {
@@ -95,8 +104,8 @@ export default function StopList({handleSelection}) {
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
                     primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
-                    primary={bookmarks[selectedIndex].stop_code}
-                    secondary={bookmarks[selectedIndex].intersection}
+                    primary={bookmarks[activeIndex].stop_code}
+                    secondary={bookmarks[activeIndex].intersection}
                 />
             </ListItem>
                 
@@ -109,7 +118,7 @@ export default function StopList({handleSelection}) {
             {bookmarks.map((stop, index) => (
                 <MenuItem
                     key={stop.stop_code}
-                    selected={index === selectedIndex}
+                    selected={index === activeIndex}
                 >
                     {showDeleteButtons && (
                         <Button 

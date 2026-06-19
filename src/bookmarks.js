@@ -5,10 +5,9 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const BookmarkContext = createContext();
 
 const bookmarkDefaults = [
-    {stopID:"0200",stop_code:"0200",intersection:"University & East Campus",direction:"Westbound"},
-    {stopID:"1787",stop_code:"1787",intersection:"S Pinckney & E Main",direction:"Northbound"},
-    {stopID:"0010",stop_code:"0010",intersection:"Langdon & N Park",direction:"Westbound"},
-    {stopID:"0201",stop_code:"0201",intersection:"W Johnson & East Campus",direction:"Eastbound"}
+    {stopID:"2389",stop_code:"2389",intersection:"Monroe at Leonard",direction:"Eastbound"},
+    {stopID:"1100",stop_code:"1100",intersection:"E Mifflin at N Pinckney",direction:"Westbound"},
+    {stopID:"1509",stop_code:"1509",intersection:"Williamson at S Blount",direction:"Eastbound"}
   ];
 
 function BookmarkProvider({ children }) {

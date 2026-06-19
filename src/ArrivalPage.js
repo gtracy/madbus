@@ -6,10 +6,12 @@ import RefreshTimer from './components/RefreshTimer';
 import StopList from './components/StopList';
 import Arrival from './components/Arrival';
 import InstallPWA from './components/InstallPWA';
+import { useBookmarks } from './bookmarks';
 
 export default function ArrivalPage()  {
 
-    const [activeStopID,setActiveStopID] = useState('0010');
+    const { bookmarks } = useBookmarks();
+    const [activeStopID,setActiveStopID] = useState(bookmarks && bookmarks.length > 0 ? bookmarks[0].stop_code : '2389');
     const [refreshFlag, setRefreshFlag] = useState(false);
 
     const handleRefresh = useCallback(() => {
@@ -27,6 +29,7 @@ export default function ArrivalPage()  {
             >
                 <Toolbar sx={{ padding:0, margin:0,justifyContent: 'space-between' }}>
                     <StopList
+                        activeStopID={activeStopID}
                         handleSelection={setActiveStopID}
                     />
                     <IconButton>
