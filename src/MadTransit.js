@@ -46,7 +46,7 @@ export default function MadTransit() {
     <ThemeProvider theme={theme}>
 
       <BookmarkProvider>
-        <BrowserRouter>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
               <Route exact path="/" element={<ArrivalPage/>}/>
               <Route path="/map" element={<MapPage/>}/>
