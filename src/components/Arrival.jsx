@@ -5,30 +5,11 @@ import { Box, Typography, LinearProgress } from '@mui/material';
 import ArrowRight from '@mui/icons-material/ArrowRight';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import { makeStyles } from '@mui/styles';
-
 import TransitAPI from '../transit-api';
 const transit = new TransitAPI();
 
 const MAX_ARRIVALS_SHOWN = 20;
 const MAX_MiNUTES_SHOWN = 45;
-
-const useStyles = makeStyles({
-    containerDetails: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    spacer: {
-        padding: 0,
-        margin: 0,
-        lineHeight: .5
-    },
-    largeIcon: {
-        height: 96,
-        width: 96
-    }
-});
 
 const prettyDestination = (destination) => {
     let new_destination = destination.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -42,8 +23,6 @@ const prettyDestination = (destination) => {
 }
 
 function ArrivalCountdown({routes}) {
-    const classes = useStyles();
-
     let routeid = ' ';
     let destination = ' ';
     let minutes = undefined;
@@ -69,7 +48,8 @@ function ArrivalCountdown({routes}) {
             ? <Box mt={0} mb={2}
                 display="flex" 
                 flexDirection="column"
-                className={classes.containerDetails}
+                alignItems="center"
+                justifyContent="center"
                 >
                 <Typography variant="body2"
                     sx={{ display: 'flex', alignItems: 'center', maxWidth:'60hw' }}
@@ -83,9 +63,10 @@ function ArrivalCountdown({routes}) {
             : <Box
                 display="flex" 
                 flexDirection="column"
-                className={classes.containerDetails}
+                alignItems="center"
+                justifyContent="center"
               >
-                <SentimentVeryDissatisfiedIcon className={classes.largeIcon}/>
+                <SentimentVeryDissatisfiedIcon sx={{ height: 96, width: 96 }}/>
                 <Typography variant="subtitle1">no routes coming at this stop currently</Typography>
             </Box>
         }
@@ -93,8 +74,6 @@ function ArrivalCountdown({routes}) {
 }
 
 function UpcomingArrivals({routes}) {
-    const classes = useStyles();
-
     let arrivals = [];
     let more_coming = false;
     
@@ -184,7 +163,8 @@ function UpcomingArrivals({routes}) {
         <Box 
             display="flex" 
             flexDirection="column"
-            className={classes.containerDetails}
+            alignItems="center"
+            justifyContent="center"
             sx={{marginTop:2}}
         >
         <table>
@@ -199,8 +179,6 @@ function UpcomingArrivals({routes}) {
 export default function Arrival({activeStopID,refresh}) {
     const [arrivals,setArrivals] = useState({"status":-1});
     const [loading,setLoading] = useState(true);
-
-    const classes = useStyles();
 
     useEffect( () => {
         setLoading(true);
@@ -225,7 +203,7 @@ export default function Arrival({activeStopID,refresh}) {
             }}
         >
             {loading ? (
-                <LinearProgress className={classes.containerDetails}/>
+                <LinearProgress sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}/>
             ) : (<div>
                 <ArrivalCountdown routes={arrivals}/>
                 <UpcomingArrivals routes={arrivals}/>

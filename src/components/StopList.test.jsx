@@ -5,16 +5,23 @@ import StopList from './StopList';
 import { BookmarkProvider } from '../bookmarks';
 
 // Mock react-ga4 to prevent initialization errors
-jest.mock('react-ga4', () => ({
-  initialize: jest.fn(),
-  event: jest.fn(),
+vi.mock('react-ga4', () => ({
+  default: {
+    initialize: vi.fn(),
+    event: vi.fn(),
+  },
+  initialize: vi.fn(),
+  event: vi.fn(),
 }));
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
-}));
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 describe('StopList Component', () => {
   beforeEach(() => {
@@ -26,7 +33,7 @@ describe('StopList Component', () => {
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <BookmarkProvider>
-          <StopList handleSelection={jest.fn()} />
+          <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
       </MemoryRouter>
     );
@@ -40,7 +47,7 @@ describe('StopList Component', () => {
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <BookmarkProvider>
-          <StopList handleSelection={jest.fn()} />
+          <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
       </MemoryRouter>
     );
@@ -54,7 +61,7 @@ describe('StopList Component', () => {
   });
 
   test('calls handleSelection when a different stop is selected', () => {
-    const handleSelectionMock = jest.fn();
+    const handleSelectionMock = vi.fn();
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <BookmarkProvider>
@@ -76,7 +83,7 @@ describe('StopList Component', () => {
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <BookmarkProvider>
-          <StopList handleSelection={jest.fn()} />
+          <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
       </MemoryRouter>
     );
@@ -91,7 +98,7 @@ describe('StopList Component', () => {
   });
 
   test('deletes a bookmark when Delete button is clicked in edit mode', () => {
-    const handleSelectionMock = jest.fn();
+    const handleSelectionMock = vi.fn();
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <BookmarkProvider>

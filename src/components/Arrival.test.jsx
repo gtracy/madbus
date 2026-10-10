@@ -4,19 +4,19 @@ import Arrival from './Arrival';
 import TransitAPI from '../transit-api';
 
 // Mock the TransitAPI module
-jest.mock('../transit-api');
+vi.mock('../transit-api');
 
 describe('Arrival Component', () => {
   let mockGetArrivals;
 
   beforeEach(() => {
-    mockGetArrivals = jest.fn();
+    mockGetArrivals = vi.fn();
     TransitAPI.prototype.getArrivals = mockGetArrivals;
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   test('displays loading progress indicator initially', async () => {

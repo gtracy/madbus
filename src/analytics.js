@@ -1,4 +1,6 @@
-import ReactGA from 'react-ga4';
+import ReactGA4 from 'react-ga4';
+const ReactGA = ReactGA4.default || ReactGA4;
+
 ReactGA.initialize('G-NWLE29X95Q');
 
 const buttonClick = (action) => ReactGA.event({

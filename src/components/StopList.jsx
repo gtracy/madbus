@@ -2,8 +2,6 @@ import React from 'react';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
-
 import { Box, Button, List, ListItem, ListItemText} from '@mui/material';
 import { Menu, MenuItem} from '@mui/material';
 import { Typography } from '@mui/material';
@@ -19,24 +17,9 @@ import { useBookmarks } from '../bookmarks';
 import { gaEvents } from '../analytics';
 
 
-const useStyles = makeStyles({
-    menuAction: {
-        padding: '0px 0px 0px 4px',
-        margin: '0px 0px 0px 4px',
-        minHeight: '12px'
-    },
-    deleteButton: {
-        padding: '0px 4px 0px 0px',
-        margin: '0px',
-        minWidth: '12px',
-    }
-  });
-  
-
 export default function StopList({activeStopID, handleSelection}) {
     const { bookmarks, setBookmarks } = useBookmarks();
     const navigate = useNavigate();
-    const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [showDeleteButtons, setShowDeleteButtons] = useState(false);
@@ -122,7 +105,7 @@ export default function StopList({activeStopID, handleSelection}) {
                 >
                     {showDeleteButtons && (
                         <Button 
-                            className={classes.deleteButton}
+                            sx={{ padding: '0px 4px 0px 0px', margin: '0px', minWidth: '12px' }}
                             color="primary" 
                             onClick={(event) => handleDeleteClick(stop.stop_code, index)}>
                             <DeleteIcon />
@@ -158,21 +141,21 @@ export default function StopList({activeStopID, handleSelection}) {
                 </MenuItem>
             ))}
             <hr/>
-            <MenuItem className={classes.menuAction}>
+            <MenuItem sx={{ padding: '0px 0px 0px 4px', margin: '0px 0px 0px 4px', minHeight: '12px' }}>
                 <Button onClick={handleMenuAddClick}>
                     <AddBoxRoundedIcon/> 
                     <Typography ml={1}>Add</Typography>
                 </Button>
             </MenuItem>
             {!showDeleteButtons ? <div>
-                <MenuItem className={classes.menuAction}>
+                <MenuItem sx={{ padding: '0px 0px 0px 4px', margin: '0px 0px 0px 4px', minHeight: '12px' }}>
                     <Button onClick={handleMenuEditClick}>
                         <EditLocationAltIcon/>
                         <Typography ml={1}>Edit</Typography>
                     </Button>
                 </MenuItem>
             </div> : <div>
-                <MenuItem className={classes.menuAction}>
+                <MenuItem sx={{ padding: '0px 0px 0px 4px', margin: '0px 0px 0px 4px', minHeight: '12px' }}>
                     <Button onClick={handleMenuEditClick}>
                         <CheckCircleIcon
                             color="success"

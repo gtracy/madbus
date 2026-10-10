@@ -5,13 +5,13 @@ describe('TransitAPI', () => {
 
   beforeEach(() => {
     api = new TransitAPI();
-    global.fetch = jest.fn();
-    jest.spyOn(console, 'error').mockImplementation(() => {});
-    jest.spyOn(console, 'log').mockImplementation(() => {});
+    global.fetch = vi.fn();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   describe('getArrivals', () => {
@@ -20,7 +20,7 @@ describe('TransitAPI', () => {
         { routeID: '02', minutes: 8, destination: 'WEST TRANSFER' }
       ];
       global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue({
+        json: vi.fn().mockResolvedValue({
           status: '0',
           stop: { route: mockRoutes }
         })
@@ -29,14 +29,17 @@ describe('TransitAPI', () => {
       const result = await api.getArrivals('0200');
 
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/v1/getarrivals?key=undefined&stopID=0200')
+        expect.stringContaining('/v1/getarrivals?')
+      );
+      expect(global.fetch).toHaveBeenCalledWith(
+        expect.stringContaining('&stopID=0200')
       );
       expect(result).toEqual(mockRoutes);
     });
 
     test('fetches arrivals with route ID when provided', async () => {
       global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue({
+        json: vi.fn().mockResolvedValue({
           status: '0',
           stop: { route: [] }
         })
@@ -51,7 +54,7 @@ describe('TransitAPI', () => {
 
     test('returns empty array and logs error on status !== "0"', async () => {
       global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue({
+        json: vi.fn().mockResolvedValue({
           status: '1',
           error: 'Invalid stop'
         })
@@ -82,7 +85,7 @@ describe('TransitAPI', () => {
       ];
       global.fetch.mockResolvedValue({
         ok: true,
-        json: jest.fn().mockResolvedValue(mockStops)
+        json: vi.fn().mockResolvedValue(mockStops)
       });
 
       const firstResult = await api.getStops();
