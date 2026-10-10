@@ -86,7 +86,7 @@ export default function StopList({activeStopID, handleSelection}) {
             >
                 <ArrowDropDownIcon fontSize="large"/>
                 <ListItemText
-                    primaryTypographyProps={{ sx: { lineHeight: '1.5' } }}                              
+                    slotProps={{ primary: { sx: { lineHeight: '1.5' } } }}                              
                     primary={bookmarks[activeIndex].stop_code}
                     secondary={bookmarks[activeIndex].intersection}
                 />
