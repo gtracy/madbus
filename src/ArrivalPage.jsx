@@ -38,7 +38,7 @@ export default function ArrivalPage()  {
                 </Toolbar>
             </AppBar>
 
-        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px', bgcolor: '#ffffff', color: 'text.primary' }}>
+        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px', bgcolor: '#ffffff', color: '#212121' }}>
           <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
         </Box>
 

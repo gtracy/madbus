@@ -59,7 +59,7 @@ function ArrivalCountdown({routes}) {
                     <Typography variant="body2"
                         sx={{ display: 'flex', alignItems: 'center', maxWidth:'60vw' }}
                     >
-                        Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
+                        Route {routeid}<ArrowRight fontSize="small" sx={{ mx: 0.5 }}/>{prettyDestination(destination)}
                     </Typography>
 
                     <Typography variant="h1">{minutes}</Typography>
@@ -112,7 +112,7 @@ function UpcomingArrivals({routes}) {
                         <Typography variant="h6"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                            <DirectionsBusIcon fontSize="small"/> {r.routeID}
+                            <DirectionsBusIcon fontSize="small" sx={{ mr: 0.5 }}/> {r.routeID}
                         </Typography>
                     </td>
                     <td>
@@ -128,7 +128,7 @@ function UpcomingArrivals({routes}) {
                     </td>
                     <td>
                         {show_clock ?
-                            <Typography variant="body1"
+                            <Typography variant="body2"
                                 sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 {r.arrivalTime}
