@@ -144,14 +144,14 @@ export default function StopList({activeStopID, handleSelection}) {
             <MenuItem sx={{ padding: '0px 0px 0px 4px', margin: '0px 0px 0px 4px', minHeight: '12px' }}>
                 <Button onClick={handleMenuAddClick}>
                     <AddBoxRoundedIcon/> 
-                    <Typography ml={1}>Add</Typography>
+                    <Typography sx={{ ml: 1 }}>Add</Typography>
                 </Button>
             </MenuItem>
             {!showDeleteButtons ? <div>
                 <MenuItem sx={{ padding: '0px 0px 0px 4px', margin: '0px 0px 0px 4px', minHeight: '12px' }}>
                     <Button onClick={handleMenuEditClick}>
                         <EditLocationAltIcon/>
-                        <Typography ml={1}>Edit</Typography>
+                        <Typography sx={{ ml: 1 }}>Edit</Typography>
                     </Button>
                 </MenuItem>
             </div> : <div>
@@ -160,7 +160,7 @@ export default function StopList({activeStopID, handleSelection}) {
                         <CheckCircleIcon
                             color="success"
                         />
-                        <Typography ml={1}>Done</Typography>
+                        <Typography sx={{ ml: 1 }}>Done</Typography>
                     </Button>
                 </MenuItem>
             </div>}

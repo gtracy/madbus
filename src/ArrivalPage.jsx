@@ -21,7 +21,8 @@ export default function ArrivalPage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return(  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    return (
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary' }}>
 
             <AppBar 
                 position="fixed"
@@ -54,7 +55,7 @@ export default function ArrivalPage()  {
             <InstallPWA/>
           </Toolbar>
         </AppBar>
-      </div>
+      </Box>
     )
 
 }

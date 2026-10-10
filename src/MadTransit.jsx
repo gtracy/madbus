@@ -2,6 +2,7 @@ import React from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import ArrivalPage from './ArrivalPage';
 import MapPage from './MapPage';
@@ -35,7 +36,8 @@ const theme = createTheme({
         fontSize: '8.2rem',
         fontWeight: 700,
         lineHeight: 0.75,
-        paddingTop: '16px'
+        paddingTop: '16px',
+        color: '#ffffff',
       },
     },
 });
@@ -44,6 +46,7 @@ export default function MadTransit() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
 
       <BookmarkProvider>
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
