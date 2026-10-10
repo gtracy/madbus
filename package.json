@@ -13,7 +13,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
-    "react-router-dom": "^6.30.3",
+    "react-router-dom": "^7.18.4",
     "react-scripts": "^5.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.3.1",
@@ -46,7 +46,7 @@
     "serialize-javascript": "^7.0.6",
     "@tootallnate/once": "^2.0.1",
     "http-proxy-middleware": "^3.0.7",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.2",
     "uuid": "^11.1.1",
     "webpack-dev-server": "^4.15.2"
   }
