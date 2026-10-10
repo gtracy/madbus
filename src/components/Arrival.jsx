@@ -62,7 +62,7 @@ function ArrivalCountdown({routes}) {
                         Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
                     </Typography>
 
-                    <Typography variant="h1" sx={{ color: '#ffffff' }}>{minutes}</Typography>
+                    <Typography variant="h1">{minutes}</Typography>
                     <Typography variant="caption">{minuteLabel}</Typography>
                 </Box>
                 : <Box

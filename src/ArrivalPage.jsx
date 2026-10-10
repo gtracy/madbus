@@ -21,8 +21,7 @@ export default function ArrivalPage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary' }}>
+    return(  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#ffffff' }}>
 
             <AppBar 
                 position="fixed"
@@ -39,7 +38,7 @@ export default function ArrivalPage()  {
                 </Toolbar>
             </AppBar>
 
-        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
+        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px', bgcolor: '#ffffff', color: 'text.primary' }}>
           <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
         </Box>
 
@@ -55,7 +54,7 @@ export default function ArrivalPage()  {
             <InstallPWA/>
           </Toolbar>
         </AppBar>
-      </Box>
+      </div>
     )
 
 }
