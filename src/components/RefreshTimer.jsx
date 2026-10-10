@@ -41,7 +41,7 @@ function CircularProgressWithLabel(props) {
         { (props.value > 99 ) ?
           <AutoModeIcon color="secondary"/>
         :
-          <Typography variant="caption" component="div" color="text.secondary">
+          <Typography variant="caption" component="div" sx={{ color: '#ffffff' }}>
             {prettyProgressLabel(props.value)}
           </Typography>
         } 

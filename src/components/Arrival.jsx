@@ -43,34 +43,42 @@ function ArrivalCountdown({routes}) {
     }
 
 
-    return(<Box>
-        {minutes
-            ? <Box mt={0} mb={2}
-                display="flex" 
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                >
-                <Typography variant="body2"
-                    sx={{ display: 'flex', alignItems: 'center', maxWidth:'60hw' }}
-                >
-                    Route {routeid}<ArrowRight fontSize="small"/>{prettyDestination(destination)}
-                </Typography>
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            {minutes
+                ? <Box
+                    sx={{
+                        mt: 0,
+                        mb: 2,
+                        display: 'flex', 
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    >
+                    <Typography variant="body2"
+                        sx={{ display: 'flex', alignItems: 'center', maxWidth:'60vw' }}
+                    >
+                        Route {routeid}<ArrowRight fontSize="small" sx={{ mx: 0.5 }}/>{prettyDestination(destination)}
+                    </Typography>
 
-                <Typography variant="h1">{minutes}</Typography>
-                <Typography variant="caption">{minuteLabel}</Typography>
-            </Box>
-            : <Box
-                display="flex" 
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <SentimentVeryDissatisfiedIcon sx={{ height: 96, width: 96 }}/>
-                <Typography variant="subtitle1">no routes coming at this stop currently</Typography>
-            </Box>
-        }
-    </Box>)
+                    <Typography variant="h1">{minutes}</Typography>
+                    <Typography variant="caption">{minuteLabel}</Typography>
+                </Box>
+                : <Box
+                    sx={{
+                        display: 'flex', 
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                  >
+                    <SentimentVeryDissatisfiedIcon sx={{ height: 96, width: 96 }}/>
+                    <Typography variant="subtitle1">no routes coming at this stop currently</Typography>
+                </Box>
+            }
+        </Box>
+    )
 }
 
 function UpcomingArrivals({routes}) {
@@ -104,7 +112,7 @@ function UpcomingArrivals({routes}) {
                         <Typography variant="h6"
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                            <DirectionsBusIcon size="small"/> {r.routeID}
+                            <DirectionsBusIcon fontSize="small" sx={{ mr: 0.5 }}/> {r.routeID}
                         </Typography>
                     </td>
                     <td>
@@ -120,7 +128,7 @@ function UpcomingArrivals({routes}) {
                     </td>
                     <td>
                         {show_clock ?
-                            <Typography variant="body"
+                            <Typography variant="body2"
                                 sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 {r.arrivalTime}
@@ -161,11 +169,14 @@ function UpcomingArrivals({routes}) {
 
     return(
         <Box 
-            display="flex" 
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            sx={{marginTop:2}}
+            sx={{
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                marginTop: 2,
+                width: '100%',
+            }}
         >
         <table>
             <tbody>
@@ -196,18 +207,20 @@ export default function Arrival({activeStopID,refresh}) {
 
     return (
         <Box
-            display="flex"
-            flexDirection="column"
             sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 marginTop: '3vh',
+                width: '100%',
             }}
         >
             {loading ? (
-                <LinearProgress sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}/>
-            ) : (<div>
+                <LinearProgress sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}/>
+            ) : (<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
                 <ArrivalCountdown routes={arrivals}/>
                 <UpcomingArrivals routes={arrivals}/>
-            </div>)}
+            </Box>)}
         </Box>
     )
 }

@@ -21,7 +21,7 @@ export default function ArrivalPage()  {
     useEffect(() => {
     }, [refreshFlag]);
   
-    return(  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    return(  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#ffffff' }}>
 
             <AppBar 
                 position="fixed"
@@ -38,7 +38,7 @@ export default function ArrivalPage()  {
                 </Toolbar>
             </AppBar>
 
-        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
+        <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px', bgcolor: '#ffffff', color: '#212121' }}>
           <Arrival activeStopID={activeStopID} refresh={refreshFlag}/>
         </Box>
 
