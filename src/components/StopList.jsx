@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Box, Button, List, ListItem, ListItemText} from '@mui/material';
 import { Menu, MenuItem} from '@mui/material';
 import { Typography } from '@mui/material';
