@@ -1,6 +1,6 @@
 
 import MapComponent from './components/Map';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';

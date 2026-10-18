@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import StopList from './StopList';
 import { BookmarkProvider } from '../bookmarks';
 
@@ -15,8 +15,8 @@ vi.mock('react-ga4', () => ({
 }));
 
 const mockNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
     useNavigate: () => mockNavigate,
@@ -31,7 +31,7 @@ describe('StopList Component', () => {
 
   test('renders default selected stop on mount', () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <BookmarkProvider>
           <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
@@ -45,7 +45,7 @@ describe('StopList Component', () => {
 
   test('opens menu when selected stop list item is clicked', () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <BookmarkProvider>
           <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
@@ -63,7 +63,7 @@ describe('StopList Component', () => {
   test('calls handleSelection when a different stop is selected', () => {
     const handleSelectionMock = vi.fn();
     render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <BookmarkProvider>
           <StopList handleSelection={handleSelectionMock} />
         </BookmarkProvider>
@@ -81,7 +81,7 @@ describe('StopList Component', () => {
 
   test('navigates to map page when Add button is clicked', () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <BookmarkProvider>
           <StopList handleSelection={vi.fn()} />
         </BookmarkProvider>
@@ -100,7 +100,7 @@ describe('StopList Component', () => {
   test('deletes a bookmark when Delete button is clicked in edit mode', () => {
     const handleSelectionMock = vi.fn();
     render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <BookmarkProvider>
           <StopList handleSelection={handleSelectionMock} />
         </BookmarkProvider>

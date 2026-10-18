@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import ArrivalPage from './ArrivalPage';
@@ -46,9 +46,9 @@ export default function MadTransit() {
     <ThemeProvider theme={theme}>
 
       <BookmarkProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <BrowserRouter>
             <Routes>
-              <Route exact path="/" element={<ArrivalPage/>}/>
+              <Route path="/" element={<ArrivalPage/>}/>
               <Route path="/map" element={<MapPage/>}/>
             </Routes>
         </BrowserRouter>
