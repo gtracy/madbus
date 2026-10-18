@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import ArrivalPage from './ArrivalPage';
-import MapPage from './MapPage';
+const MapPage = lazy(() => import('./MapPage'));
 import { BookmarkProvider } from './bookmarks';
 
 
@@ -47,10 +47,12 @@ export default function MadTransit() {
 
       <BookmarkProvider>
         <BrowserRouter>
+          <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<ArrivalPage/>}/>
               <Route path="/map" element={<MapPage/>}/>
             </Routes>
+          </Suspense>
         </BrowserRouter>
       </BookmarkProvider>
 
